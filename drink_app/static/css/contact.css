@@ -1,0 +1,639 @@
+
+/* =========================================
+   CONTACT PAGE
+   The Bottle House
+========================================= */
+
+:root {
+    --contact_gold: #d6a84f;
+    --contact_gold_light: #f0d58a;
+
+    --contact_dark: #0b0b0b;
+    --contact_dark_2: #151515;
+    --contact_dark_3: #1d1d1d;
+
+    --contact_white: #eeeeee;
+    --contact_muted: #a5a5a5;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.contact_hero {
+    min-height: 470px;
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(5, 5, 5, 0.96),
+            rgba(5, 5, 5, 0.72)
+        ),
+        url("https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=1800&q=85")
+        center / cover no-repeat;
+}
+
+
+.contact_hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 400px;
+    height: 400px;
+
+    right: -120px;
+    top: 30px;
+
+    border-radius: 50%;
+
+    background: rgba(214, 168, 79, 0.12);
+
+    filter: blur(90px);
+}
+
+
+.contact_hero_content {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 750px;
+}
+
+
+.contact_eyebrow {
+    display: inline-block;
+
+    color: var(--contact_gold);
+
+    text-transform: uppercase;
+
+    letter-spacing: 4px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    margin-bottom: 18px;
+}
+
+
+.contact_hero_title {
+    color: var(--contact_white);
+
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(45px, 7vw, 75px);
+
+    line-height: 1.05;
+
+    font-weight: 700;
+
+    margin: 0;
+}
+
+
+.contact_hero_title span {
+    color: var(--contact_gold);
+}
+
+
+.contact_hero_text {
+    max-width: 650px;
+
+    color: #cecece;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    margin-top: 25px;
+}
+
+
+/* =========================================
+   CONTACT MAIN SECTION
+========================================= */
+
+.contact_section {
+    padding: 100px 0;
+
+    background: var(--contact_dark);
+
+    color: var(--contact_white);
+}
+
+
+/* =========================================
+   CONTACT INFORMATION
+========================================= */
+
+.contact_info {
+    padding-right: 30px;
+}
+
+
+.contact_section_title {
+    font-family: "Playfair Display", serif;
+
+    color: var(--contact_white);
+
+    font-size: clamp(38px, 5vw, 55px);
+
+    line-height: 1.15;
+
+    margin-bottom: 22px;
+}
+
+
+.contact_section_title span {
+    color: var(--contact_gold);
+}
+
+
+.contact_info_text {
+    color: var(--contact_muted);
+
+    font-size: 16px;
+
+    line-height: 1.8;
+
+    margin-bottom: 35px;
+}
+
+
+.contact_info_item {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 18px;
+
+    margin-bottom: 27px;
+}
+
+
+.contact_info_icon {
+    width: 52px;
+    height: 52px;
+
+    min-width: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 13px;
+
+    color: var(--contact_gold);
+
+    background: rgba(214, 168, 79, 0.10);
+
+    font-size: 21px;
+
+    border: 1px solid rgba(214, 168, 79, 0.15);
+}
+
+
+.contact_info_item h3 {
+    font-family: "Playfair Display", serif;
+
+    color: var(--contact_white);
+
+    font-size: 21px;
+
+    margin: 0 0 6px;
+}
+
+
+.contact_info_item p {
+    color: var(--contact_muted);
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    margin: 0;
+}
+
+
+/* =========================================
+   SOCIAL MEDIA
+========================================= */
+
+.contact_social {
+    margin-top: 35px;
+
+    padding-top: 28px;
+
+    border-top: 1px solid #272727;
+}
+
+
+.contact_social > span {
+    display: block;
+
+    color: var(--contact_white);
+
+    font-weight: 600;
+
+    margin-bottom: 15px;
+}
+
+
+.contact_social_links {
+    display: flex;
+
+    gap: 10px;
+}
+
+
+.contact_social_links a {
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: var(--contact_gold);
+
+    text-decoration: none;
+
+    border: 1px solid #333;
+
+    border-radius: 50%;
+
+    transition: 0.3s ease;
+}
+
+
+.contact_social_links a:hover {
+    color: #111;
+
+    background: var(--contact_gold);
+
+    border-color: var(--contact_gold);
+
+    transform: translateY(-3px);
+}
+
+
+/* =========================================
+   CONTACT FORM
+========================================= */
+
+.contact_form_box {
+    padding: 45px;
+
+    background: var(--contact_dark_2);
+
+    border: 1px solid #292929;
+
+    border-radius: 22px;
+
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
+}
+
+
+.contact_form_header {
+    margin-bottom: 32px;
+}
+
+
+.contact_form_title {
+    color: var(--contact_white);
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 42px;
+
+    margin-bottom: 12px;
+}
+
+
+.contact_form_title span {
+    color: var(--contact_gold);
+}
+
+
+.contact_form_header p {
+    color: var(--contact_muted);
+
+    line-height: 1.7;
+
+    margin: 0;
+}
+
+
+.contact_form_label {
+    display: block;
+
+    color: #ddd;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    margin-bottom: 9px;
+}
+
+
+.contact_form_input {
+    min-height: 52px;
+
+    color: var(--contact_white) !important;
+
+    background: #101010 !important;
+
+    border: 1px solid #333 !important;
+
+    border-radius: 10px !important;
+
+    padding: 12px 15px;
+
+    box-shadow: none !important;
+
+    transition: 0.3s ease;
+}
+
+
+.contact_form_input::placeholder {
+    color: #777;
+}
+
+
+.contact_form_input:focus {
+    border-color: var(--contact_gold) !important;
+
+    box-shadow:
+        0 0 0 3px rgba(214, 168, 79, 0.10) !important;
+}
+
+
+.contact_form_input option {
+    background: #151515;
+
+    color: white;
+}
+
+
+.contact_form_textarea {
+    resize: vertical;
+
+    min-height: 145px;
+}
+
+
+.contact_submit_btn {
+    width: 100%;
+
+    min-height: 54px;
+
+    border: 1px solid var(--contact_gold);
+
+    border-radius: 50px;
+
+    background: var(--contact_gold);
+
+    color: #111;
+
+    font-weight: 700;
+
+    transition: 0.3s ease;
+}
+
+
+.contact_submit_btn:hover {
+    background: var(--contact_gold_light);
+
+    border-color: var(--contact_gold_light);
+
+    color: #111;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   LOCATION
+========================================= */
+
+.contact_location_section {
+    padding: 90px 0;
+
+    background: var(--contact_dark_2);
+}
+
+
+.contact_location_box {
+    padding: 55px;
+
+    background: var(--contact_dark);
+
+    border: 1px solid #292929;
+
+    border-radius: 22px;
+}
+
+
+.contact_location_title {
+    color: var(--contact_white);
+
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(38px, 5vw, 55px);
+
+    margin-bottom: 18px;
+}
+
+
+.contact_location_title span {
+    color: var(--contact_gold);
+}
+
+
+.contact_location_text {
+    max-width: 550px;
+
+    color: var(--contact_muted);
+
+    line-height: 1.8;
+
+    margin-bottom: 28px;
+}
+
+
+.contact_btn_gold {
+    padding: 13px 28px;
+
+    color: #111;
+
+    background: var(--contact_gold);
+
+    border: 1px solid var(--contact_gold);
+
+    border-radius: 50px;
+
+    font-weight: 700;
+
+    transition: 0.3s ease;
+}
+
+
+.contact_btn_gold:hover {
+    background: var(--contact_gold_light);
+
+    border-color: var(--contact_gold_light);
+
+    color: #111;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   MAP PLACEHOLDER
+========================================= */
+
+.contact_map_placeholder {
+    min-height: 300px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    border-radius: 18px;
+
+    border: 1px solid #333;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(214, 168, 79, 0.10),
+            transparent 65%
+        ),
+        #151515;
+}
+
+
+.contact_map_placeholder > i {
+    color: var(--contact_gold);
+
+    font-size: 45px;
+
+    margin-bottom: 15px;
+}
+
+
+.contact_map_placeholder h3 {
+    color: var(--contact_white);
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 25px;
+
+    margin-bottom: 5px;
+}
+
+
+.contact_map_placeholder p {
+    color: var(--contact_muted);
+
+    margin: 0;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 991px) {
+
+    .contact_hero {
+        min-height: 450px;
+    }
+
+    .contact_section {
+        padding: 75px 0;
+    }
+
+    .contact_info {
+        padding-right: 0;
+    }
+
+    .contact_form_box {
+        padding: 35px;
+    }
+
+}
+
+
+@media (max-width: 767px) {
+
+    .contact_hero {
+        min-height: 500px;
+
+        background:
+            linear-gradient(
+                rgba(5, 5, 5, 0.86),
+                rgba(5, 5, 5, 0.96)
+            ),
+            url("https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=1200&q=85")
+            center / cover no-repeat;
+    }
+
+
+    .contact_hero_title {
+        font-size: 48px;
+    }
+
+
+    .contact_hero_text {
+        font-size: 15px;
+    }
+
+
+    .contact_form_box {
+        padding: 28px 20px;
+    }
+
+
+    .contact_form_title {
+        font-size: 36px;
+    }
+
+
+    .contact_location_section {
+        padding: 65px 0;
+    }
+
+
+    .contact_location_box {
+        padding: 35px 22px;
+    }
+
+
+    .contact_map_placeholder {
+        min-height: 250px;
+    }
+
+}

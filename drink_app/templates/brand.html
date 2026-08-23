@@ -1,0 +1,401 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Our Brands | Premium Collection{% endblock %}
+
+{% block content %}
+
+<style>
+    .brands-page {
+        background: #f8f7f4;
+        min-height: 80vh;
+        padding-bottom: 70px;
+    }
+
+    /* Hero */
+    .brands-hero {
+        background: linear-gradient(135deg, #171717, #3b2b20);
+        color: white;
+        text-align: center;
+        padding: 70px 20px;
+    }
+
+    .brands-hero span {
+        color: #d6b36a;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    .brands-hero h1 {
+        font-size: 46px;
+        margin: 15px 0;
+    }
+
+    .brands-hero p {
+        max-width: 650px;
+        margin: auto;
+        color: #ddd;
+        line-height: 1.7;
+    }
+
+
+    /* Brands */
+    .brands-container {
+        max-width: 1200px;
+        margin: 50px auto;
+        padding: 0 20px;
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 35px;
+    }
+
+    .section-title h2 {
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+
+    .section-title p {
+        color: #777;
+    }
+
+
+    .brands-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
+    }
+
+    .brand-card {
+        background: white;
+        border-radius: 15px;
+        padding: 35px 20px;
+        text-align: center;
+
+        border: 1px solid #eee;
+
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+
+        transition: all 0.3s ease;
+    }
+
+    .brand-card:hover {
+        transform: translateY(-7px);
+        border-color: #d6b36a;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .brand-logo img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-fit: contain;
+        border: 5px solid rgb(151, 134, 8);
+        display: block;
+        display: flex;
+    }
+
+    .brand-card h3 {
+        font-size: 21px;
+        margin-bottom: 8px;
+    }
+
+    .brand-card p {
+        color: #777;
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+
+    .brand-btn {
+        display: inline-block;
+        text-decoration: none;
+
+        padding: 10px 20px;
+
+        border-radius: 6px;
+
+        background: #222;
+        color: white;
+
+        font-size: 14px;
+
+        transition: 0.3s;
+    }
+
+    .brand-btn:hover {
+        background: #d6b36a;
+        color: #222;
+    }
+
+
+    /* Bottom Banner */
+    .brand-banner {
+        max-width: 1200px;
+        margin: 60px auto 0;
+        padding: 0 20px;
+    }
+
+    .brand-banner-box {
+        background: linear-gradient(135deg, #211b17, #4a3525);
+        color: white;
+
+        border-radius: 18px;
+
+        padding: 45px;
+        text-align: center;
+    }
+
+    .brand-banner-box h2 {
+        font-size: 30px;
+        margin-bottom: 12px;
+    }
+
+    .brand-banner-box p {
+        color: #ddd;
+        max-width: 650px;
+        margin: auto;
+        line-height: 1.6;
+    }
+
+
+    /* Responsive */
+    @media (max-width: 1000px) {
+        .brands-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 600px) {
+        .brands-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .brands-hero h1 {
+            font-size: 36px;
+        }
+
+        .brand-banner-box {
+            padding: 30px 20px;
+        }
+    }
+</style>
+
+
+<div class="brands-page">
+
+    <!-- Hero -->
+    <section class="brands-hero">
+
+        <span>Premium Selection</span>
+
+        <h1>Our Brands</h1>
+
+        <p>
+            Explore our carefully selected collection of trusted
+            and premium brands from around the world.
+        </p>
+
+    </section>
+
+
+    <!-- Brands -->
+    <section class="brands-container">
+
+        <div class="section-title">
+
+            <h2>Explore Our Brands</h2>
+
+            <p>
+                Discover your favourite brands and explore their collection.
+            </p>
+
+        </div>
+
+
+        <div class="brands-grid">
+
+            <!-- Brand 1 -->
+            <div class="brand-card">
+
+                <div class="brand-logo">
+                    <img src="{% static 'images/j.png' %}" alt="Jack Daniel's Logo">
+                </div>
+
+                <h3>Jack Daniel's</h3>
+
+                <p>
+                    Explore the classic Tennessee whiskey collection.
+                </p>
+
+                <a href="#" class="brand-btn">
+                    View Brand
+                </a>
+
+            </div>
+
+
+            <!-- Brand 2 -->
+            <div class="brand-card">
+
+                  <div class="brand-logo">
+                    <img src="{% static 'images/j2.png' %}" alt="Jack Daniel's Logo">
+                </div>
+
+                <h3>Johnnie Walker</h3>
+
+                <p>
+                    Discover premium Scotch whisky selections.
+                </p>
+
+                <a href="#" class="brand-btn">
+                    View Brand
+                </a>
+
+            </div>
+
+
+            <!-- Brand 3 -->
+            <div class="brand-card">
+
+                  <div class="brand-logo">
+                    <img src="{% static 'images/a.png' %}" alt="Jack Daniel's Logo">
+                </div>
+
+                <h3>Absolut</h3>
+
+                <p>
+                    Explore a collection of premium vodka products.
+                </p>
+
+                <a href="#" class="brand-btn">
+                    View Brand
+                </a>
+
+            </div>
+
+
+            <!-- Brand 4 -->
+            <div class="brand-card">
+
+                  <div class="brand-logo">
+                    <img src="{% static 'images/c.png' %}" alt="Jack Daniel's Logo">
+                </div>
+
+                <h3>Chivas Regal</h3>
+
+                <p>
+                    Experience a refined selection of blended Scotch whisky.
+                </p>
+
+                <a href="#" class="brand-btn">
+                    View Brand
+                </a>
+
+            </div>
+
+
+            <!-- Brand 5 -->
+            <div class="brand-card">
+
+                  <div class="brand-logo">
+                    <img src="{% static 'images/h.png' %}" alt="Jack Daniel's Logo">
+                </div>
+
+                <h3>Hennessy</h3>
+
+                <p>
+                    Discover premium cognac and luxury collections.
+                </p>
+
+                <a href="#" class="brand-btn">
+                    View Brand
+                </a>
+
+            </div>
+
+
+            <!-- Brand 6 -->
+            <div class="brand-card">
+
+                  <div class="brand-logo">
+                    <img src="{% static 'images/b.png' %}" alt="Jack Daniel's Logo">
+                </div>
+                <h3>Bombay Sapphire</h3>
+
+                <p>
+                    Explore premium gin selections and favourites.
+                </p>
+
+                <a href="#" class="brand-btn">
+                    View Brand
+                </a>
+
+            </div>
+
+
+            <!-- Brand 7 -->
+            <div class="brand-card">
+
+                  <div class="brand-logo">
+                    <img src="{% static 'images/g.png' %}" alt="Jack Daniel's Logo">
+                </div>
+                <h3>Grey Goose</h3>
+
+                <p>
+                    Discover an elegant collection of premium vodka.
+                </p>
+
+                <a href="#" class="brand-btn">
+                    View Brand
+                </a>
+
+            </div>
+
+
+            <!-- Brand 8 -->
+            <div class="brand-card">
+
+                 <div class="brand-logo">
+                    <img src="{% static 'images/m.png' %}" alt="Jack Daniel's Logo">
+                </div>
+
+                <h3>Martell</h3>
+
+                <p>
+                    Explore a refined collection of premium cognac.
+                </p>
+
+                <a href="#" class="brand-btn">
+                    View Brand
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Bottom -->
+    <section class="brand-banner">
+
+        <div class="brand-banner-box">
+
+            <h2>Premium Brands. Exceptional Choices.</h2>
+
+            <p>
+                From classic favourites to premium selections,
+                find the perfect drink for every occasion.
+            </p>
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}

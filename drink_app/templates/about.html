@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}About — Reserve{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<!-- ========================= ABOUT HERO ========================== -->
+<section class="about_hero">
+    <div class="container">
+        <div class="about_hero_content"> <span class="about_eyebrow"> Welcome to The Bottle House </span>
+            <h1 class="about_hero_title"> Crafted for the <span>Good Times.</span> </h1>
+            <p class="about_hero_text"> Discover a carefully selected world of premium spirits, fine wines, and
+                exceptional beverages. Every bottle has a story, and every occasion deserves the right one. </p>
+            <div class="about_hero_buttons"> <a href="#about_story" class="btn about_btn_gold"> Discover Our Story </a>
+                <a href="#about_features" class="btn about_btn_outline"> Why Choose Us </a> </div>
+        </div>
+    </div>
+</section> <!-- ========================= OUR STORY ========================== -->
+<section class="about_story_section" id="about_story">
+    <div class="container">
+        <div class="row align-items-center g-5"> <!-- Image -->
+            <div class="col-lg-6">
+                <div class="about_story_image">
+                    <div class="about_experience_badge"> <strong>15+</strong> <span>Years of Passion</span> </div>
+                </div>
+            </div> <!-- Content -->
+            <div class="col-lg-6"> <span class="about_eyebrow"> Our Story </span>
+                <div class="about_gold_line"></div>
+                <h2 class="about_section_title"> More Than a <span>Liquor Store.</span> </h2>
+                <p class="about_section_text"> At The Bottle House, our journey began with a simple passion — bringing
+                    exceptional drinks and unforgettable experiences to our customers. </p>
+                <p class="about_section_text"> From smooth whiskies and aged rums to elegant wines, premium vodkas, and
+                    handcrafted spirits, every product on our shelves is selected with care. </p>
+                <p class="about_section_text"> Whether you're celebrating a milestone, hosting friends, or simply
+                    enjoying a quiet evening, we're here to help you find the perfect bottle. </p>
+                <div class="about_signature"> — The Bottle House Team </div>
+            </div>
+        </div>
+    </div>
+</section> <!-- ========================= WHY CHOOSE US ========================== -->
+<section class="about_features_section" id="about_features">
+    <div class="container">
+        <div class="about_section_heading text-center"> <span class="about_eyebrow"> Why Choose Us </span>
+            <h2 class="about_section_title"> Quality You Can <span>Taste.</span> </h2>
+            <p class="about_section_text"> We combine premium products, knowledgeable service, and genuine passion to
+                create a shopping experience worth coming back to. </p>
+        </div>
+        <div class="row g-4"> <!-- Feature 1 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="about_feature_card">
+                    <div class="about_feature_icon"> <i class="bi bi-gem"></i> </div>
+                    <h3 class="about_feature_title"> Premium Selection </h3>
+                    <p class="about_feature_text"> Explore a curated collection of quality spirits, wines, beers, and
+                        exclusive bottles. </p>
+                </div>
+            </div> <!-- Feature 2 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="about_feature_card">
+                    <div class="about_feature_icon"> <i class="bi bi-person-check"></i> </div>
+                    <h3 class="about_feature_title"> Expert Guidance </h3>
+                    <p class="about_feature_text"> Not sure what to choose? Our team is always ready to help you find
+                        something you'll love. </p>
+                </div>
+            </div> <!-- Feature 3 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="about_feature_card">
+                    <div class="about_feature_icon"> <i class="bi bi-award"></i> </div>
+                    <h3 class="about_feature_title"> Trusted Quality </h3>
+                    <p class="about_feature_text"> We carefully select our products so you can shop with confidence and
+                        enjoy every pour. </p>
+                </div>
+            </div> <!-- Feature 4 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="about_feature_card">
+                    <div class="about_feature_icon"> <i class="bi bi-heart"></i> </div>
+                    <h3 class="about_feature_title"> Made for Moments </h3>
+                    <p class="about_feature_text"> From everyday celebrations to special occasions, we've got the
+                        perfect bottle for the moment. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> <!-- ========================= STATISTICS ========================== -->
+<section class="about_stats_section">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-6 col-lg-3">
+                <div class="about_stat_box">
+                    <div class="about_stat_number">15+</div>
+                    <div class="about_stat_label"> Years Experience </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="about_stat_box">
+                    <div class="about_stat_number">500+</div>
+                    <div class="about_stat_label"> Premium Products </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="about_stat_box">
+                    <div class="about_stat_number">10K+</div>
+                    <div class="about_stat_label"> Happy Customers </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="about_stat_box">
+                    <div class="about_stat_number">100%</div>
+                    <div class="about_stat_label"> Passion </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> <!-- ========================= CALL TO ACTION ========================== -->
+<section class="about_cta_section">
+    <div class="container">
+        <div class="about_cta_box"> <span class="about_eyebrow"> Your Next Favorite Bottle Awaits </span>
+            <h2 class="about_cta_title"> Let's Raise a <span>Glass.</span> </h2>
+            <p class="about_cta_text"> Explore our collection and discover premium drinks selected for people who
+                appreciate quality, character, and great moments. </p>
+            <div class="about_cta_buttons"> <a href="#" class="btn about_btn_gold"> Explore Collection <i
+                        class="bi bi-arrow-right ms-2"></i> </a> <a href="#" class="btn about_btn_outline"> Contact Us
+                </a> </div>
+        </div>
+    </div>
+</section>  
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %} {% block title %}Cart — Reserve{% endblock %} {% block content %} <section
+    class="page-header">
+    <div class="container"> <span>YOUR SELECTION</span>
+        <h1>Shopping Cart</h1>
+    </div>
+</section>
+<section class="section-padding">
+    <div class="container">
+        <div class="row g-5"> <!-- CART -->
+            <div class="col-lg-8"> {% for item in cart_items %} <div class="cart-item"> <img
+                        src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                    <div class="cart-item-info"> <small> {{ item.product.category }} </small>
+                        <h4> {{ item.product.name }} </h4> <strong> ${{ item.product.price }} </strong>
+                    </div> <input type="number" value="{{ item.quantity }}" min="1" class="form-control cart-quantity">
+                    <button class="btn btn-link text-danger"> <i class="bi bi-trash"></i> </button>
+                </div> {% empty %} <div class="empty-state text-center"> <i class="bi bi-bag"></i>
+                    <h2> Your cart is empty </h2>
+                    <p> Explore our collection and find something you'll enjoy responsibly. </p> <a
+                        href="{% url 'product' %}" class="btn btn-dark"> Continue Shopping </a>
+                </div> {% endfor %} </div> <!-- SUMMARY -->
+            <div class="col-lg-4">
+                <div class="cart-summary">
+                    <h3> Order Summary </h3>
+                    <div class="summary-row"> <span> Subtotal </span> <strong> $0.00 </strong> </div>
+                    <div class="summary-row"> <span> Delivery </span> <strong> Calculated at checkout </strong> </div>
+                    <hr>
+                    <div class="summary-total"> <span> Total </span> <strong> $0.00 </strong> </div> <button
+                        class="btn btn-gold w-100 btn-lg mt-4"> Proceed to Checkout </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+ {% endblock %}

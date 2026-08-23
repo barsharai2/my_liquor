@@ -1,0 +1,354 @@
+{% extends "base.html" %}
+
+{% block title %}Special Offers | Your Liquor Shop{% endblock %}
+
+{% block content %}
+
+<style>
+    .offers-page {
+        background: #f8f7f4;
+        padding-bottom: 60px;
+    }
+
+    /* Hero */
+    .offers-hero {
+        background: linear-gradient(135deg, #171717, #3b2b20);
+        color: white;
+        text-align: center;
+        padding: 75px 20px;
+    }
+
+    .offers-hero span {
+        display: inline-block;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 15px;
+        color: #d6b36a;
+    }
+
+    .offers-hero h1 {
+        font-size: 48px;
+        margin: 0 0 15px;
+    }
+
+    .offers-hero p {
+        max-width: 650px;
+        margin: auto;
+        color: #ddd;
+        font-size: 17px;
+    }
+
+
+    /* Section */
+    .offers-container {
+        max-width: 1200px;
+        margin: 50px auto;
+        padding: 0 20px;
+    }
+
+    .section-heading {
+        text-align: center;
+        margin-bottom: 35px;
+    }
+
+    .section-heading h2 {
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+
+    .section-heading p {
+        color: #777;
+    }
+
+
+    /* Cards */
+    .offers-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+    }
+
+    .offer-card {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        transition: 0.3s;
+        position: relative;
+    }
+
+    .offer-card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14);
+    }
+
+    .offer-top {
+        background: #292929;
+        color: white;
+        padding: 35px 20px;
+        text-align: center;
+    }
+
+    .offer-top .badge {
+        display: inline-block;
+        background: #d6b36a;
+        color: #222;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+    }
+
+    .offer-top h3 {
+        font-size: 24px;
+        margin: 0;
+    }
+
+    .offer-body {
+        padding: 25px;
+        text-align: center;
+    }
+
+    .discount {
+        font-size: 42px;
+        font-weight: 800;
+        color: #9b2c2c;
+        margin-bottom: 10px;
+    }
+
+    .offer-body p {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 22px;
+    }
+
+    .offer-btn {
+        display: inline-block;
+        background: #222;
+        color: white;
+        text-decoration: none;
+        padding: 12px 25px;
+        border-radius: 7px;
+        transition: 0.3s;
+    }
+
+    .offer-btn:hover {
+        background: #d6b36a;
+        color: #222;
+    }
+
+
+    /* Featured Offer */
+    .featured-offer {
+        max-width: 1200px;
+        margin: 60px auto 0;
+        padding: 0 20px;
+    }
+
+    .featured-box {
+        background: linear-gradient(135deg, #211b17, #4a3525);
+        color: white;
+        border-radius: 18px;
+        padding: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+    }
+
+    .featured-box h2 {
+        font-size: 34px;
+        margin-bottom: 12px;
+    }
+
+    .featured-box p {
+        color: #ddd;
+        max-width: 600px;
+        line-height: 1.6;
+    }
+
+    .featured-discount {
+        font-size: 55px;
+        font-weight: 800;
+        color: #d6b36a;
+        white-space: nowrap;
+    }
+
+
+    /* Responsive */
+    @media (max-width: 900px) {
+        .offers-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .featured-box {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .offers-hero h1 {
+            font-size: 36px;
+        }
+
+        .offers-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .featured-box {
+            padding: 30px 20px;
+        }
+
+        .featured-box h2 {
+            font-size: 27px;
+        }
+    }
+</style>
+
+
+<div class="offers-page">
+
+    <!-- Hero -->
+    <section class="offers-hero">
+
+        <span>Exclusive Deals</span>
+
+        <h1>Special Offers</h1>
+
+        <p>
+            Discover great deals on selected drinks and premium collections.
+            Shop your favourites and enjoy more value.
+        </p>
+
+    </section>
+
+
+    <!-- Offers -->
+    <section class="offers-container">
+
+        <div class="section-heading">
+            <h2>Today's Best Deals</h2>
+            <p>Limited-time offers available while stocks last.</p>
+        </div>
+
+
+        <div class="offers-grid">
+
+            <!-- Offer 1 -->
+            <div class="offer-card">
+
+                <div class="offer-top">
+                    <span class="badge">Weekend Deal</span>
+                    <h3>Weekend Special</h3>
+                </div>
+
+                <div class="offer-body">
+
+                    <div class="discount">
+                        10% OFF
+                    </div>
+
+                    <p>
+                        Enjoy 10% off selected products during our
+                        weekend special.
+                    </p>
+
+                    <a href="{% url 'new_arrivals' %}" class="offer-btn">
+                        Shop Now
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Offer 2 -->
+            <div class="offer-card">
+
+                <div class="offer-top">
+                    <span class="badge">Premium</span>
+                    <h3>Premium Collection</h3>
+                </div>
+
+                <div class="offer-body">
+
+                    <div class="discount">
+                        15% OFF
+                    </div>
+
+                    <p>
+                        Save 15% on selected premium drinks
+                        and special collections.
+                    </p>
+
+                    <a href="{% url 'new_arrivals' %}" class="offer-btn">
+                        Explore Now
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Offer 3 -->
+            <div class="offer-card">
+
+                <div class="offer-top">
+                    <span class="badge">Best Value</span>
+                    <h3>Buy More & Save</h3>
+                </div>
+
+                <div class="offer-body">
+
+                    <div class="discount">
+                        20% OFF
+                    </div>
+
+                    <p>
+                        Get bigger savings when purchasing
+                        selected products together.
+                    </p>
+
+                    <a href="{% url 'new_arrivals' %}" class="offer-btn">
+                        Shop Deals
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Featured Offer -->
+    <section class="featured-offer">
+
+        <div class="featured-box">
+
+            <div>
+                <h2>Don't Miss Our Special Deals</h2>
+
+                <p>
+                    Explore our latest collection and discover
+                    exclusive prices on selected products.
+                    Offers are available for a limited time.
+                </p>
+            </div>
+
+            <div class="featured-discount">
+                SAVE 20%
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}

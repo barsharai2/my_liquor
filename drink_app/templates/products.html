@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Shop — Reserve{% endblock %}
+{% block content %} <section class="page-header">
+    <div class="container"> <span>OUR COLLECTION</span>
+        <h1>Shop All Drinks</h1>
+        <p> Explore our curated selection. </p>
+    </div>
+</section>
+<section class="section-padding">
+    <div class="container">
+        <div class="row"> <!-- FILTER SIDEBAR -->
+            <div class="col-lg-3 mb-4">
+                <div class="filter-box">
+                    <h4>Filter Products</h4>
+                    <hr>
+                    <h6>Category</h6>
+                    <div class="form-check"> <input class="form-check-input" type="checkbox" id="whisky"> <label
+                            class="form-check-label" for="whisky"> Whisky </label> </div>
+                    <div class="form-check"> <input class="form-check-input" type="checkbox" id="vodka"> <label
+                            class="form-check-label" for="vodka"> Vodka </label> </div>
+                    <div class="form-check"> <input class="form-check-input" type="checkbox" id="gin"> <label
+                            class="form-check-label" for="gin"> Gin </label> </div>
+                    <div class="form-check"> <input class="form-check-input" type="checkbox" id="rum"> <label
+                            class="form-check-label" for="rum"> Rum </label> </div>
+                    <div class="form-check"> <input class="form-check-input" type="checkbox" id="wine"> <label
+                            class="form-check-label" for="wine"> Wine </label> </div>
+                    <div class="form-check"> <input class="form-check-input" type="checkbox" id="beer"> <label
+                            class="form-check-label" for="beer"> Beer </label> </div>
+                    <hr>
+                    <h6>Price</h6> <input type="range" class="form-range" min="0" max="500">
+                    <div class="d-flex justify-content-between"> <small>$0</small> <small>$500+</small> </div>
+                </div>
+            </div> <!-- PRODUCTS -->
+            <div class="col-lg-9">
+                <div class="d-flex justify-content-between mb-4">
+                    <p class="mb-0"> Showing our collection </p> <select class="form-select sort-select">
+                        <option>Sort: Featured</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                        <option>Newest</option>
+                    </select>
+                </div>
+                <div class="row g-4"> {% for product in products %} <div class="col-md-6 col-xl-4">
+                        <div class="product-card">
+                            <div class="product-image"> <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                            </div>
+                            <div class="product-info"> <small> {{ product.category }} </small>
+                                <h4> {{ product.name }} </h4>
+                                <p> {{ product.description|truncatewords:12 }} </p>
+                                <div class="d-flex justify-content-between"> <strong> ${{ product.price }} </strong> <a
+                                        href="#" class="add-cart"> <i class="bi bi-bag-plus"></i> </a> </div>
+                            </div>
+                        </div>
+                    </div> {% empty %} <div class="col-12">
+                        <div class="empty-state"> <i class="bi bi-search"></i>
+                            <h3> No products found </h3>
+                            <p> Try another search or category. </p>
+                        </div>
+                    </div> {% endfor %} </div>
+            </div>
+        </div>
+    </div>
+</section> {% endblock %}

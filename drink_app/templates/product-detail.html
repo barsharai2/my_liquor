@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% block title %}{{ product.name }} — Reserve{% endblock %} {% block content %} <section
+    class="section-padding">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+                <div class="product-detail-image"> <img src="{{ product.image.url }}" class="img-fluid"
+                        alt="{{ product.name }}"> </div>
+            </div>
+            <div class="col-lg-6"> <small class="text-gold"> {{ product.category }} </small>
+                <h1 class="display-5 mt-2"> {{ product.name }} </h1>
+                <div class="product-rating mb-3"> ★★★★★ <span> 4.9 / 5 </span> </div>
+                <h2> ${{ product.price }} </h2>
+                <p class="lead"> {{ product.description }} </p>
+                <hr>
+                <div class="row mb-4">
+                    <div class="col-6"> <small>Category</small> <strong class="d-block"> {{ product.category }}
+                        </strong> </div>
+                    <div class="col-6"> <small>Size</small> <strong class="d-block"> {{ product.size|default:"750ml" }}
+                        </strong> </div>
+                </div>
+                <div class="d-flex gap-3"> <input type="number" value="1" min="1" class="form-control quantity-input">
+                    <button class="btn btn-dark btn-lg flex-grow-1"> <i class="bi bi-bag-plus me-2"></i> Add to Cart
+                    </button>
+                </div>
+                <div class="product-notice mt-4"> <i class="bi bi-info-circle me-2"></i> Please enjoy responsibly and
+                    comply with applicable age and delivery requirements. </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
