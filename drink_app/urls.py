@@ -14,4 +14,6 @@ path('cart/',cart, name='cart'),
 path("new-arrivals/", new_arrivals, name="new_arrivals"),
 path("offers/",offers, name="offers"),
 path("brands/", brands, name="brands"),
+path("add-to-cart/<int:product_id>/",add_to_cart,name="add_to_cart" ),
+   
 ]

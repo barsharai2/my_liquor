@@ -124,14 +124,27 @@ def contact(request):
 # BLOG
 # =========================================================
 
-def brands(request):
-    return render(request, "brand.html")
+def blog(request):
+
+    posts = Blog.objects.all().order_by(
+        "-created_at"
+    )
+
+    context = {
+        "posts": posts,
+    }
+
+    return render(
+        request,
+        "blog.html",
+        context
+    )
+
 
 
 
 def new_arrivals(request):
     products = Product.objects.all().order_by("-id")
-
     return render(request, "new_arrivals.html", {
         "products": products
     })
@@ -267,8 +280,6 @@ def register(request):
         "register.html"
     )
 
-def offers(request):
-    return render(request, "offer.html")
 
 # =========================================================
 # LOGOUT
@@ -332,29 +343,18 @@ def cart(request):
 # =========================================================
 
 def add_to_cart(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
 
-    product = get_object_or_404(
-        Product,
-        id=product_id
-    )
+    cart = request.session.get("cart", {})
 
-    cart_data = request.session.get(
-        "cart",
-        {}
-    )
+    product_id = str(product.id)
 
-    product_id = str(product_id)
-
-    if product_id in cart_data:
-
-        cart_data[product_id] += 1
-
+    if product_id in cart:
+        cart[product_id] += 1
     else:
+        cart[product_id] = 1
 
-        cart_data[product_id] = 1
-
-    request.session["cart"] = cart_data
-
+    request.session["cart"] = cart
     request.session.modified = True
 
     messages.success(
@@ -363,7 +363,6 @@ def add_to_cart(request, product_id):
     )
 
     return redirect("cart")
-
 
 # =========================================================
 # REMOVE FROM CART
@@ -387,3 +386,9 @@ def remove_from_cart(request, product_id):
     request.session.modified = True
 
     return redirect("cart")
+
+def brands (request):
+    return render(request,"brand.html")
+
+def offers (request):
+    return render(request,"offer.html")
