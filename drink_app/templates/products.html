@@ -1,63 +1,1801 @@
 {% extends 'base.html' %}
 {% block title %}Shop — Reserve{% endblock %}
-{% block content %} <section class="page-header">
-    <div class="container"> <span>OUR COLLECTION</span>
-        <h1>Shop All Drinks</h1>
-        <p> Explore our curated selection. </p>
-    </div>
-</section>
-<section class="section-padding">
-    <div class="container">
-        <div class="row"> <!-- FILTER SIDEBAR -->
-            <div class="col-lg-3 mb-4">
-                <div class="filter-box">
-                    <h4>Filter Products</h4>
-                    <hr>
-                    <h6>Category</h6>
-                    <div class="form-check"> <input class="form-check-input" type="checkbox" id="whisky"> <label
-                            class="form-check-label" for="whisky"> Whisky </label> </div>
-                    <div class="form-check"> <input class="form-check-input" type="checkbox" id="vodka"> <label
-                            class="form-check-label" for="vodka"> Vodka </label> </div>
-                    <div class="form-check"> <input class="form-check-input" type="checkbox" id="gin"> <label
-                            class="form-check-label" for="gin"> Gin </label> </div>
-                    <div class="form-check"> <input class="form-check-input" type="checkbox" id="rum"> <label
-                            class="form-check-label" for="rum"> Rum </label> </div>
-                    <div class="form-check"> <input class="form-check-input" type="checkbox" id="wine"> <label
-                            class="form-check-label" for="wine"> Wine </label> </div>
-                    <div class="form-check"> <input class="form-check-input" type="checkbox" id="beer"> <label
-                            class="form-check-label" for="beer"> Beer </label> </div>
-                    <hr>
-                    <h6>Price</h6> <input type="range" class="form-range" min="0" max="500">
-                    <div class="d-flex justify-content-between"> <small>$0</small> <small>$500+</small> </div>
-                </div>
-            </div> <!-- PRODUCTS -->
-            <div class="col-lg-9">
-                <div class="d-flex justify-content-between mb-4">
-                    <p class="mb-0"> Showing our collection </p> <select class="form-select sort-select">
-                        <option>Sort: Featured</option>
-                        <option>Price: Low to High</option>
-                        <option>Price: High to Low</option>
-                        <option>Newest</option>
-                    </select>
-                </div>
-                <div class="row g-4"> {% for product in products %} <div class="col-md-6 col-xl-4">
-                        <div class="product-card">
-                            <div class="product-image"> <img src="{{ product.image.url }}" alt="{{ product.name }}">
-                            </div>
-                            <div class="product-info"> <small> {{ product.category }} </small>
-                                <h4> {{ product.name }} </h4>
-                                <p> {{ product.description|truncatewords:12 }} </p>
-                                <div class="d-flex justify-content-between"> <strong> ${{ product.price }} </strong> <a
-                                        href="#" class="add-cart"> <i class="bi bi-bag-plus"></i> </a> </div>
-                            </div>
-                        </div>
-                    </div> {% empty %} <div class="col-12">
-                        <div class="empty-state"> <i class="bi bi-search"></i>
-                            <h3> No products found </h3>
-                            <p> Try another search or category. </p>
-                        </div>
-                    </div> {% endfor %} </div>
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/product.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<section class="product-page">
+
+    <div class="container-fluid px-lg-5">
+
+        <!-- ================= PAGE HEADER ================= -->
+
+        <div class="product-page-header">
+
+            <div>
+                <span class="page-eyebrow">
+                    OUR COLLECTION
+                </span>
+
+                <h1>Premium Drinks</h1>
+
+                <p>
+                    Discover our carefully selected collection
+                    of premium spirits, wine and beer.
+                </p>
             </div>
+
+            <div class="breadcrumb-area">
+                <a href="/">Home</a>
+                <i class="bi bi-chevron-right"></i>
+                <span>Shop</span>
+            </div>
+
         </div>
+
+
+        <div class="row g-4">
+
+
+            <!-- ==================================================
+                 SIDEBAR
+            =================================================== -->
+
+            <aside class="col-lg-3">
+
+                <div class="shop-sidebar">
+
+
+                    <!-- SEARCH -->
+
+                    <div class="sidebar-search">
+
+                        <label>
+                            Search Products
+                        </label>
+
+                        <div class="search-box">
+
+                            <input
+                                type="text"
+                                id="productSearch"
+                                placeholder="Search drinks..."
+                            >
+
+                            <i class="bi bi-search"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CATEGORIES -->
+
+                    <div class="filter-section">
+
+                        <h4>Categories</h4>
+
+
+                        <div class="category-list">
+
+
+                            <!-- ALL -->
+
+                            <a
+                                href="#"
+                                class="category-link active"
+                                data-category="all"
+                            >
+
+                                <span>
+                                    <i class="bi bi-grid"></i>
+                                    All Drinks
+                                </span>
+
+                                <small>48</small>
+
+                            </a>
+
+
+                            <!-- ================= SPIRITS ================= -->
+
+                            <div class="category-group">
+
+                                <div class="category-heading">
+
+                                    <span>
+                                        <i class="bi bi-droplet"></i>
+                                        Spirits
+                                    </span>
+
+                                    <i class="bi bi-chevron-down"></i>
+
+                                </div>
+
+
+                                <a
+                                    href="#"
+                                    class="sub-category"
+                                    data-category="whisky"
+                                >
+                                    Whisky
+                                    <span>8</span>
+                                </a>
+
+
+                                <a
+                                    href="#"
+                                    class="sub-category"
+                                    data-category="vodka"
+                                >
+                                    Vodka
+                                    <span>5</span>
+                                </a>
+
+
+                                <a
+                                    href="#"
+                                    class="sub-category"
+                                    data-category="rum"
+                                >
+                                    Rum
+                                    <span>6</span>
+                                </a>
+
+
+                                <a
+                                    href="#"
+                                    class="sub-category"
+                                    data-category="gin"
+                                >
+                                    Gin
+                                    <span>5</span>
+                                </a>
+
+
+                                <a
+                                    href="#"
+                                    class="sub-category"
+                                    data-category="tequila"
+                                >
+                                    Tequila
+                                    <span>4</span>
+                                </a>
+
+
+                                <a
+                                    href="#"
+                                    class="sub-category"
+                                    data-category="brandy"
+                                >
+                                    Brandy & Cognac
+                                    <span>3</span>
+                                </a>
+
+
+                                <a
+                                    href="#"
+                                    class="sub-category"
+                                    data-category="liqueurs"
+                                >
+                                    Liqueurs
+                                    <span>4</span>
+                                </a>
+
+                            </div>
+
+
+                            <!-- ================= WINE ================= -->
+
+                            <div class="category-group">
+
+                                <div class="category-heading">
+
+                                    <span>
+                                        <i class="bi bi-cup"></i>
+                                        Wine
+                                    </span>
+
+                                    <i class="bi bi-chevron-down"></i>
+
+                                </div>
+
+
+                                <a
+                                    href="#"
+                                    class="sub-category"
+                                    data-category="red-wine"
+                                >
+                                    Red Wine
+                                    <span>5</span>
+                                </a>
+
+
+                                <a
+                                    href="#"
+                                    class="sub-category"
+                                    data-category="white-wine"
+                                >
+                                    White Wine
+                                    <span>4</span>
+                                </a>
+
+
+                                <a
+                                    href="#"
+                                    class="sub-category"
+                                    data-category="rose"
+                                >
+                                    Rosé
+                                    <span>2</span>
+                                </a>
+
+
+                                <a
+                                    href="#"
+                                    class="sub-category"
+                                    data-category="sparkling"
+                                >
+                                    Sparkling Wine
+                                    <span>2</span>
+                                </a>
+
+                            </div>
+
+
+                            <!-- ================= BEER ================= -->
+
+                            <div class="category-group">
+
+                                <div class="category-heading">
+
+                                    <span>
+                                        <i class="bi bi-beer"></i>
+                                        Beer
+                                    </span>
+
+                                    <i class="bi bi-chevron-down"></i>
+
+                                </div>
+
+
+                                <a
+                                    href="#"
+                                    class="sub-category"
+                                    data-category="lager"
+                                >
+                                    Lager
+                                    <span>2</span>
+                                </a>
+
+
+                                <a
+                                    href="#"
+                                    class="sub-category"
+                                    data-category="ipa"
+                                >
+                                    IPA
+                                    <span>1</span>
+                                </a>
+
+
+                                <a
+                                    href="#"
+                                    class="sub-category"
+                                    data-category="craft-beer"
+                                >
+                                    Craft Beer
+                                    <span>2</span>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PRICE -->
+
+                    <div class="filter-section">
+
+                        <h4>Price Range</h4>
+
+                        <div class="price-inputs">
+
+                            <input
+                                type="number"
+                                id="minPrice"
+                                placeholder="Min"
+                            >
+
+                            <span>—</span>
+
+                            <input
+                                type="number"
+                                id="maxPrice"
+                                placeholder="Max"
+                            >
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="apply-filter"
+                            id="applyPrice"
+                        >
+                            Apply Filter
+                        </button>
+
+                    </div>
+
+
+                    <!-- ALCOHOL STRENGTH -->
+
+                    <div class="filter-section">
+
+                        <h4>Alcohol Strength</h4>
+
+
+                        <label class="filter-check">
+
+                            <input
+                                type="checkbox"
+                                class="abv-filter"
+                                value="low"
+                            >
+
+                            <span>
+                                Under 10%
+                            </span>
+
+                        </label>
+
+
+                        <label class="filter-check">
+
+                            <input
+                                type="checkbox"
+                                class="abv-filter"
+                                value="medium"
+                            >
+
+                            <span>
+                                10% - 20%
+                            </span>
+
+                        </label>
+
+
+                        <label class="filter-check">
+
+                            <input
+                                type="checkbox"
+                                class="abv-filter"
+                                value="strong"
+                            >
+
+                            <span>
+                                20% - 40%
+                            </span>
+
+                        </label>
+
+
+                        <label class="filter-check">
+
+                            <input
+                                type="checkbox"
+                                class="abv-filter"
+                                value="very-strong"
+                            >
+
+                            <span>
+                                40%+
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+
+
+            <!-- ==================================================
+                 PRODUCT AREA
+            =================================================== -->
+
+            <main class="col-lg-9">
+
+
+                <!-- TOOLBAR -->
+
+                <div class="products-toolbar">
+
+                    <div class="products-count">
+
+                        <strong id="productCount">
+                            9
+                        </strong>
+
+                        products found
+
+                    </div>
+
+
+                    <div class="toolbar-right">
+
+
+                        <div class="view-buttons">
+
+                            <button
+                                type="button"
+                                class="view-btn active"
+                            >
+                                <i class="bi bi-grid-3x3-gap"></i>
+                            </button>
+
+                            <button
+                                type="button"
+                                class="view-btn"
+                            >
+                                <i class="bi bi-list"></i>
+                            </button>
+
+                        </div>
+
+
+                        <select
+                            class="sort-select"
+                            id="sortProducts"
+                        >
+
+                            <option value="featured">
+                                Sort: Featured
+                            </option>
+
+                            <option value="price-low">
+                                Price: Low to High
+                            </option>
+
+                            <option value="price-high">
+                                Price: High to Low
+                            </option>
+
+                            <option value="rating">
+                                Highest Rated
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ==================================================
+                     PRODUCT GRID
+                =================================================== -->
+
+                <div
+                    class="row g-4"
+                    id="productGrid"
+                >
+
+
+                    <!-- ================= WHISKY ================= -->
+
+                    <div
+                        class="col-sm-6 col-xl-4 product-item"
+                        data-category="whisky"
+                        data-price="64.99"
+                        data-rating="4.9"
+                        data-abv="very-strong"
+                    >
+
+                        <div class="product-card">
+
+                            <div class="product-image">
+
+                                <span class="product-badge bestseller">
+                                    BESTSELLER
+                                </span>
+
+
+                                <button
+                                    type="button"
+                                    class="wishlist"
+                                >
+                                    <i class="bi bi-heart"></i>
+                                </button>
+
+
+                                <img
+                                    src="{% static 'images/products/whisky-1.jpg' %}"
+                                    alt="Highland Reserve Whisky"
+                                >
+
+                            </div>
+
+
+                            <div class="product-details">
+
+                                <span class="product-category">
+                                    WHISKY
+                                </span>
+
+                                <h3>
+                                    Highland Reserve
+                                </h3>
+
+                                <p class="product-description">
+                                    Rich oak character with smooth
+                                    vanilla and subtle spice notes.
+                                </p>
+
+
+                                <div class="product-meta">
+
+                                    <span>
+                                        <i class="bi bi-droplet"></i>
+                                        40% ABV
+                                    </span>
+
+                                    <span>
+                                        <i class="bi bi-bottle"></i>
+                                        750ml
+                                    </span>
+
+                                </div>
+
+
+                                <div class="rating">
+
+                                    <span>
+                                        ★★★★★
+                                    </span>
+
+                                    <small>
+                                        4.9 (48)
+                                    </small>
+
+                                </div>
+
+
+                                <div class="product-footer">
+
+                                    <div class="price">
+                                        $64.99
+                                    </div>
+
+                                    <button
+                                        type="button"
+                                        class="add-to-cart"
+                                    >
+                                        <i class="bi bi-bag-plus"></i>
+                                        Add
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ================= VODKA ================= -->
+
+                    <div
+                        class="col-sm-6 col-xl-4 product-item"
+                        data-category="vodka"
+                        data-price="42.50"
+                        data-rating="4.8"
+                        data-abv="very-strong"
+                    >
+
+                        <div class="product-card">
+
+                            <div class="product-image">
+
+                                <span class="product-badge new">
+                                    NEW
+                                </span>
+
+                                <button
+                                    type="button"
+                                    class="wishlist"
+                                >
+                                    <i class="bi bi-heart"></i>
+                                </button>
+
+                                <img
+                                    src="{% static 'images/products/vodka-1.jpg' %}"
+                                    alt="Silver Crest Vodka"
+                                >
+
+                            </div>
+
+
+                            <div class="product-details">
+
+                                <span class="product-category">
+                                    VODKA
+                                </span>
+
+                                <h3>
+                                    Silver Crest Vodka
+                                </h3>
+
+                                <p class="product-description">
+                                    Exceptionally smooth vodka with
+                                    a clean and crisp finish.
+                                </p>
+
+
+                                <div class="product-meta">
+
+                                    <span>
+                                        <i class="bi bi-droplet"></i>
+                                        40% ABV
+                                    </span>
+
+                                    <span>
+                                        <i class="bi bi-bottle"></i>
+                                        750ml
+                                    </span>
+
+                                </div>
+
+
+                                <div class="rating">
+
+                                    <span>
+                                        ★★★★★
+                                    </span>
+
+                                    <small>
+                                        4.8 (32)
+                                    </small>
+
+                                </div>
+
+
+                                <div class="product-footer">
+
+                                    <div class="price">
+                                        $42.50
+                                    </div>
+
+                                    <button
+                                        type="button"
+                                        class="add-to-cart"
+                                    >
+                                        <i class="bi bi-bag-plus"></i>
+                                        Add
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ================= GIN ================= -->
+
+                    <div
+                        class="col-sm-6 col-xl-4 product-item"
+                        data-category="gin"
+                        data-price="39.99"
+                        data-rating="4.7"
+                        data-abv="very-strong"
+                    >
+
+                        <div class="product-card">
+
+                            <div class="product-image">
+
+                                <button
+                                    type="button"
+                                    class="wishlist"
+                                >
+                                    <i class="bi bi-heart"></i>
+                                </button>
+
+                                <img
+                                    src="{% static 'images/products/gin-1.jpg' %}"
+                                    alt="London Dry Gin"
+                                >
+
+                            </div>
+
+
+                            <div class="product-details">
+
+                                <span class="product-category">
+                                    GIN
+                                </span>
+
+                                <h3>
+                                    London Dry Gin
+                                </h3>
+
+                                <p class="product-description">
+                                    Classic juniper-forward gin with
+                                    citrus and botanical notes.
+                                </p>
+
+
+                                <div class="product-meta">
+
+                                    <span>
+                                        <i class="bi bi-droplet"></i>
+                                        43% ABV
+                                    </span>
+
+                                    <span>
+                                        <i class="bi bi-bottle"></i>
+                                        700ml
+                                    </span>
+
+                                </div>
+
+
+                                <div class="rating">
+
+                                    <span>
+                                        ★★★★★
+                                    </span>
+
+                                    <small>
+                                        4.7 (29)
+                                    </small>
+
+                                </div>
+
+
+                                <div class="product-footer">
+
+                                    <div class="price">
+                                        $39.99
+                                    </div>
+
+                                    <button
+                                        type="button"
+                                        class="add-to-cart"
+                                    >
+                                        <i class="bi bi-bag-plus"></i>
+                                        Add
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ================= RED WINE ================= -->
+
+                    <div
+                        class="col-sm-6 col-xl-4 product-item"
+                        data-category="red-wine"
+                        data-price="38.99"
+                        data-rating="4.9"
+                        data-abv="medium"
+                    >
+
+                        <div class="product-card">
+
+                            <div class="product-image">
+
+                                <span class="product-badge bestseller">
+                                    POPULAR
+                                </span>
+
+                                <button
+                                    type="button"
+                                    class="wishlist"
+                                >
+                                    <i class="bi bi-heart"></i>
+                                </button>
+
+                                <img
+                                    src="{% static 'images/products/red-wine-1.jpg' %}"
+                                    alt="Reserve Cabernet Sauvignon"
+                                >
+
+                            </div>
+
+
+                            <div class="product-details">
+
+                                <span class="product-category">
+                                    RED WINE
+                                </span>
+
+                                <h3>
+                                    Reserve Cabernet
+                                </h3>
+
+                                <p class="product-description">
+                                    Full-bodied red wine with rich
+                                    berry and oak flavors.
+                                </p>
+
+
+                                <div class="product-meta">
+
+                                    <span>
+                                        <i class="bi bi-droplet"></i>
+                                        14.5% ABV
+                                    </span>
+
+                                    <span>
+                                        <i class="bi bi-bottle"></i>
+                                        750ml
+                                    </span>
+
+                                </div>
+
+
+                                <div class="rating">
+
+                                    <span>
+                                        ★★★★★
+                                    </span>
+
+                                    <small>
+                                        4.9 (56)
+                                    </small>
+
+                                </div>
+
+
+                                <div class="product-footer">
+
+                                    <div class="price">
+                                        $38.99
+                                    </div>
+
+                                    <button
+                                        type="button"
+                                        class="add-to-cart"
+                                    >
+                                        <i class="bi bi-bag-plus"></i>
+                                        Add
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ================= WHITE WINE ================= -->
+
+                    <div
+                        class="col-sm-6 col-xl-4 product-item"
+                        data-category="white-wine"
+                        data-price="31.99"
+                        data-rating="4.6"
+                        data-abv="medium"
+                    >
+
+                        <div class="product-card">
+
+                            <div class="product-image">
+
+                                <button
+                                    type="button"
+                                    class="wishlist"
+                                >
+                                    <i class="bi bi-heart"></i>
+                                </button>
+
+                                <img
+                                    src="{% static 'images/products/white-wine-1.jpg' %}"
+                                    alt="Estate Chardonnay"
+                                >
+
+                            </div>
+
+
+                            <div class="product-details">
+
+                                <span class="product-category">
+                                    WHITE WINE
+                                </span>
+
+                                <h3>
+                                    Estate Chardonnay
+                                </h3>
+
+                                <p class="product-description">
+                                    Elegant Chardonnay with bright
+                                    fruit and a smooth finish.
+                                </p>
+
+
+                                <div class="product-meta">
+
+                                    <span>
+                                        <i class="bi bi-droplet"></i>
+                                        13.5% ABV
+                                    </span>
+
+                                    <span>
+                                        <i class="bi bi-bottle"></i>
+                                        750ml
+                                    </span>
+
+                                </div>
+
+
+                                <div class="rating">
+
+                                    <span>
+                                        ★★★★☆
+                                    </span>
+
+                                    <small>
+                                        4.6 (24)
+                                    </small>
+
+                                </div>
+
+
+                                <div class="product-footer">
+
+                                    <div class="price">
+                                        $31.99
+                                    </div>
+
+                                    <button
+                                        type="button"
+                                        class="add-to-cart"
+                                    >
+                                        <i class="bi bi-bag-plus"></i>
+                                        Add
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ================= BEER ================= -->
+
+                    <div
+                        class="col-sm-6 col-xl-4 product-item"
+                        data-category="craft-beer"
+                        data-price="18.99"
+                        data-rating="4.8"
+                        data-abv="low"
+                    >
+
+                        <div class="product-card">
+
+                            <div class="product-image">
+
+                                <span class="product-badge bestseller">
+                                    BESTSELLER
+                                </span>
+
+                                <button
+                                    type="button"
+                                    class="wishlist"
+                                >
+                                    <i class="bi bi-heart"></i>
+                                </button>
+
+                                <img
+                                    src="{% static 'images/products/beer-1.jpg' %}"
+                                    alt="Golden Craft Lager"
+                                >
+
+                            </div>
+
+
+                            <div class="product-details">
+
+                                <span class="product-category">
+                                    CRAFT BEER
+                                </span>
+
+                                <h3>
+                                    Golden Craft Lager
+                                </h3>
+
+                                <p class="product-description">
+                                    Refreshing craft lager with a
+                                    crisp malt character.
+                                </p>
+
+
+                                <div class="product-meta">
+
+                                    <span>
+                                        <i class="bi bi-droplet"></i>
+                                        5.2% ABV
+                                    </span>
+
+                                    <span>
+                                        <i class="bi bi-bottle"></i>
+                                        6 × 330ml
+                                    </span>
+
+                                </div>
+
+
+                                <div class="rating">
+
+                                    <span>
+                                        ★★★★★
+                                    </span>
+
+                                    <small>
+                                        4.8 (61)
+                                    </small>
+
+                                </div>
+
+
+                                <div class="product-footer">
+
+                                    <div class="price">
+                                        $18.99
+                                    </div>
+
+                                    <button
+                                        type="button"
+                                        class="add-to-cart"
+                                    >
+                                        <i class="bi bi-bag-plus"></i>
+                                        Add
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ================= RUM ================= -->
+
+                    <div
+                        class="col-sm-6 col-xl-4 product-item"
+                        data-category="rum"
+                        data-price="44.99"
+                        data-rating="4.7"
+                        data-abv="very-strong"
+                    >
+
+                        <div class="product-card">
+
+                            <div class="product-image">
+
+                                <button
+                                    type="button"
+                                    class="wishlist"
+                                >
+                                    <i class="bi bi-heart"></i>
+                                </button>
+
+                                <img
+                                    src="{% static 'images/products/rum-1.jpg' %}"
+                                    alt="Caribbean Gold Rum"
+                                >
+
+                            </div>
+
+
+                            <div class="product-details">
+
+                                <span class="product-category">
+                                    RUM
+                                </span>
+
+                                <h3>
+                                    Caribbean Gold Rum
+                                </h3>
+
+                                <p class="product-description">
+                                    Smooth aged rum with caramel,
+                                    vanilla and tropical notes.
+                                </p>
+
+
+                                <div class="product-meta">
+
+                                    <span>
+                                        <i class="bi bi-droplet"></i>
+                                        40% ABV
+                                    </span>
+
+                                    <span>
+                                        <i class="bi bi-bottle"></i>
+                                        750ml
+                                    </span>
+
+                                </div>
+
+
+                                <div class="rating">
+
+                                    <span>
+                                        ★★★★★
+                                    </span>
+
+                                    <small>
+                                        4.7 (35)
+                                    </small>
+
+                                </div>
+
+
+                                <div class="product-footer">
+
+                                    <div class="price">
+                                        $44.99
+                                    </div>
+
+                                    <button
+                                        type="button"
+                                        class="add-to-cart"
+                                    >
+                                        <i class="bi bi-bag-plus"></i>
+                                        Add
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ================= SPARKLING WINE ================= -->
+
+                    <div
+                        class="col-sm-6 col-xl-4 product-item"
+                        data-category="sparkling"
+                        data-price="49.99"
+                        data-rating="4.9"
+                        data-abv="medium"
+                    >
+
+                        <div class="product-card">
+
+                            <div class="product-image">
+
+                                <span class="product-badge new">
+                                    NEW
+                                </span>
+
+                                <button
+                                    type="button"
+                                    class="wishlist"
+                                >
+                                    <i class="bi bi-heart"></i>
+                                </button>
+
+                                <img
+                                    src="{% static 'images/products/sparkling-1.jpg' %}"
+                                    alt="Classic Brut Sparkling Wine"
+                                >
+
+                            </div>
+
+
+                            <div class="product-details">
+
+                                <span class="product-category">
+                                    SPARKLING WINE
+                                </span>
+
+                                <h3>
+                                    Classic Brut
+                                </h3>
+
+                                <p class="product-description">
+                                    Elegant sparkling wine with
+                                    fresh citrus and delicate bubbles.
+                                </p>
+
+
+                                <div class="product-meta">
+
+                                    <span>
+                                        <i class="bi bi-droplet"></i>
+                                        12% ABV
+                                    </span>
+
+                                    <span>
+                                        <i class="bi bi-bottle"></i>
+                                        750ml
+                                    </span>
+
+                                </div>
+
+
+                                <div class="rating">
+
+                                    <span>
+                                        ★★★★★
+                                    </span>
+
+                                    <small>
+                                        4.9 (42)
+                                    </small>
+
+                                </div>
+
+
+                                <div class="product-footer">
+
+                                    <div class="price">
+                                        $49.99
+                                    </div>
+
+                                    <button
+                                        type="button"
+                                        class="add-to-cart"
+                                    >
+                                        <i class="bi bi-bag-plus"></i>
+                                        Add
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ================= TEQUILA ================= -->
+
+                    <div
+                        class="col-sm-6 col-xl-4 product-item"
+                        data-category="tequila"
+                        data-price="59.99"
+                        data-rating="4.8"
+                        data-abv="very-strong"
+                    >
+
+                        <div class="product-card">
+
+                            <div class="product-image">
+
+                                <button
+                                    type="button"
+                                    class="wishlist"
+                                >
+                                    <i class="bi bi-heart"></i>
+                                </button>
+
+                                <img
+                                    src="{% static 'images/products/tequila-1.jpg' %}"
+                                    alt="Silver Agave Tequila"
+                                >
+
+                            </div>
+
+
+                            <div class="product-details">
+
+                                <span class="product-category">
+                                    TEQUILA
+                                </span>
+
+                                <h3>
+                                    Silver Agave Tequila
+                                </h3>
+
+                                <p class="product-description">
+                                    100% agave tequila with fresh
+                                    herbal and citrus notes.
+                                </p>
+
+
+                                <div class="product-meta">
+
+                                    <span>
+                                        <i class="bi bi-droplet"></i>
+                                        40% ABV
+                                    </span>
+
+                                    <span>
+                                        <i class="bi bi-bottle"></i>
+                                        750ml
+                                    </span>
+
+                                </div>
+
+
+                                <div class="rating">
+
+                                    <span>
+                                        ★★★★★
+                                    </span>
+
+                                    <small>
+                                        4.8 (37)
+                                    </small>
+
+                                </div>
+
+
+                                <div class="product-footer">
+
+                                    <div class="price">
+                                        $59.99
+                                    </div>
+
+                                    <button
+                                        type="button"
+                                        class="add-to-cart"
+                                    >
+                                        <i class="bi bi-bag-plus"></i>
+                                        Add
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ================= PAGINATION ================= -->
+
+                <div class="pagination-area">
+
+                    <button
+                        type="button"
+                        class="page-arrow"
+                    >
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="page-number active"
+                    >
+                        1
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="page-number"
+                    >
+                        2
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="page-number"
+                    >
+                        3
+                    </button>
+
+
+                    <span>...</span>
+
+
+                    <button
+                        type="button"
+                        class="page-number"
+                    >
+                        6
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="page-arrow"
+                    >
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+
+                </div>
+
+            </main>
+
+        </div>
+
     </div>
-</section> {% endblock %}
+
+</section>
+
+
+
+<!-- ==========================================================
+     JAVASCRIPT
+=========================================================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    const searchInput =
+        document.getElementById("productSearch");
+
+    const products =
+        Array.from(
+            document.querySelectorAll(".product-item")
+        );
+
+    const productCount =
+        document.getElementById("productCount");
+
+    const sortSelect =
+        document.getElementById("sortProducts");
+
+
+    let selectedCategory = "all";
+
+
+    /* =====================================================
+       UPDATE PRODUCT COUNT
+    ===================================================== */
+
+    function updateCount() {
+
+        const visibleProducts =
+            products.filter(function(product) {
+
+                return product.style.display !== "none";
+
+            });
+
+        productCount.textContent =
+            visibleProducts.length;
+
+    }
+
+
+    /* =====================================================
+       SEARCH
+    ===================================================== */
+
+    searchInput.addEventListener(
+        "input",
+        function () {
+
+            const search =
+                this.value
+                    .toLowerCase()
+                    .trim();
+
+
+            products.forEach(function(product) {
+
+                const text =
+                    product.innerText.toLowerCase();
+
+                const category =
+                    product.dataset.category;
+
+
+                const matchesSearch =
+                    text.includes(search);
+
+
+                const matchesCategory =
+                    selectedCategory === "all" ||
+                    category === selectedCategory;
+
+
+                if (
+                    matchesSearch &&
+                    matchesCategory
+                ) {
+
+                    product.style.display = "";
+
+                } else {
+
+                    product.style.display = "none";
+
+                }
+
+            });
+
+
+            updateCount();
+
+        }
+    );
+
+
+    /* =====================================================
+       CATEGORY FILTER
+    ===================================================== */
+
+    const categoryLinks =
+        document.querySelectorAll(
+            ".category-link, .sub-category"
+        );
+
+
+    categoryLinks.forEach(function(link) {
+
+        link.addEventListener(
+            "click",
+            function(event) {
+
+                event.preventDefault();
+
+
+                selectedCategory =
+                    this.dataset.category;
+
+
+                categoryLinks.forEach(function(item) {
+
+                    item.classList.remove("active");
+
+                });
+
+
+                this.classList.add("active");
+
+
+                const search =
+                    searchInput.value
+                        .toLowerCase()
+                        .trim();
+
+
+                products.forEach(function(product) {
+
+                    const category =
+                        product.dataset.category;
+
+                    const text =
+                        product.innerText.toLowerCase();
+
+
+                    const categoryMatch =
+                        selectedCategory === "all" ||
+                        category === selectedCategory;
+
+
+                    const searchMatch =
+                        text.includes(search);
+
+
+                    if (
+                        categoryMatch &&
+                        searchMatch
+                    ) {
+
+                        product.style.display = "";
+
+                    } else {
+
+                        product.style.display = "none";
+
+                    }
+
+                });
+
+
+                updateCount();
+
+            }
+        );
+
+    });
+
+
+    /* =====================================================
+       SORT PRODUCTS
+    ===================================================== */
+
+    sortSelect.addEventListener(
+        "change",
+        function () {
+
+            const value = this.value;
+
+
+            products.sort(function(a, b) {
+
+                if (value === "price-low") {
+
+                    return (
+                        parseFloat(a.dataset.price) -
+                        parseFloat(b.dataset.price)
+                    );
+
+                }
+
+
+                if (value === "price-high") {
+
+                    return (
+                        parseFloat(b.dataset.price) -
+                        parseFloat(a.dataset.price)
+                    );
+
+                }
+
+
+                if (value === "rating") {
+
+                    return (
+                        parseFloat(b.dataset.rating) -
+                        parseFloat(a.dataset.rating)
+                    );
+
+                }
+
+
+                return 0;
+
+            });
+
+
+            const grid =
+                document.getElementById("productGrid");
+
+
+            products.forEach(function(product) {
+
+                grid.appendChild(product);
+
+            });
+
+        }
+    );
+
+
+    /* =====================================================
+       WISHLIST
+    ===================================================== */
+
+    document
+        .querySelectorAll(".wishlist")
+        .forEach(function(button) {
+
+            button.addEventListener(
+                "click",
+                function() {
+
+                    const icon =
+                        this.querySelector("i");
+
+
+                    icon.classList.toggle(
+                        "bi-heart"
+                    );
+
+
+                    icon.classList.toggle(
+                        "bi-heart-fill"
+                    );
+
+                }
+            );
+
+        });
+
+
+    /* =====================================================
+       PRICE FILTER
+    ===================================================== */
+
+    document
+        .getElementById("applyPrice")
+        .addEventListener(
+            "click",
+            function() {
+
+                const min =
+                    parseFloat(
+                        document.getElementById(
+                            "minPrice"
+                        ).value
+                    ) || 0;
+
+
+                const max =
+                    parseFloat(
+                        document.getElementById(
+                            "maxPrice"
+                        ).value
+                    ) || Infinity;
+
+
+                products.forEach(function(product) {
+
+                    const price =
+                        parseFloat(
+                            product.dataset.price
+                        );
+
+
+                    const categoryMatch =
+                        selectedCategory === "all" ||
+                        product.dataset.category ===
+                        selectedCategory;
+
+
+                    if (
+                        price >= min &&
+                        price <= max &&
+                        categoryMatch
+                    ) {
+
+                        product.style.display = "";
+
+                    } else {
+
+                        product.style.display = "none";
+
+                    }
+
+                });
+
+
+                updateCount();
+
+            }
+        );
+
+});
+
+</script>
+
+
+{% endblock %}
