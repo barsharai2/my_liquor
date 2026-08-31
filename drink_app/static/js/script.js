@@ -131,3 +131,6 @@ if (searchInput) {
 
 }
 
+const offerProducts = products.filter(product =>
+    product.oldPrice && product.oldPrice > product.price
+);

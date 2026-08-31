@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from .models import *
+from django.db.models import Count
+
 
 # Create your views here.
 from django.shortcuts import render, redirect, get_object_or_404
@@ -19,9 +22,17 @@ def index(request):
     """
 
     products = Product.objects.all()[:8]
+    now = timezone.now()
+
+    offers = Offer.objects.filter(
+        is_active=True,
+        start_date__lte=now,
+        end_date__gte=now
+    ).prefetch_related('products')
 
     context = {
         "products": products,
+        'offers':offers,
     }
 
     return render(request, "index.html", context)
@@ -143,7 +154,6 @@ def blog(request):
 
 
 
-def new_arrivals(request):
     products = Product.objects.all().order_by("-id")
     return render(request, "new_arrivals.html", {
         "products": products
@@ -392,3 +402,70 @@ def brands (request):
 
 def offers (request):
     return render(request,"offer.html")
+
+# product-shop
+def shop(request):
+
+    category = request.GET.get("category")
+
+    products = Shop.objects.filter(
+        is_active=True
+    )
+
+    if category:
+        products = products.filter(
+            category=category
+        )
+
+    category_counts = (
+        Shop.objects
+        .filter(is_active=True)
+        .values("category")
+        .annotate(total=Count("id"))
+    )
+
+    category_counts = {
+        item["category"]: item["total"]
+        for item in category_counts
+    }
+
+    categories = []
+
+    for value, display in Shop.CATEGORY_CHOICES:
+        categories.append({
+            "value": value,
+            "display": display,
+            "count": category_counts.get(value, 0),
+        })
+
+    context = {
+        "products": products,
+        "total_products": products.count(),
+        "category_counts": category_counts,
+        "categories": categories,
+        "selected_category": category,
+    }
+
+    return render(request, "products.html", context)
+
+
+def offers(request):
+    now = timezone.now()
+
+    offers = Offer.objects.filter(
+        is_active=True,
+    ).prefetch_related('products')
+
+    for offer in offers:
+        for product in offer.products.all():
+
+            discount = (
+                product.price *
+                offer.discount_percentage / 100
+            )
+
+            product.offer_price = product.price - discount
+
+    return render(request, 'offer.html', {
+        'offers': offers
+    })
