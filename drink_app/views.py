@@ -123,7 +123,8 @@ def contact(request):
             "Thank you! Your message has been received."
         )
 
-        return redirect("contact")
+        return redirect("/contact/#contact")
+
 
     return render(
         request,

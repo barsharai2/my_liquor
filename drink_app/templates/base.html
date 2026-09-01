@@ -505,8 +505,17 @@
     <script src="{% static 'js/script.js' %}"></script>
 
     {% block extra_js %}{% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/js/intlTelInput.min.js"></script>
 
+<script>
+    const phoneInput = document.querySelector("#contact_phone");
+
+    const iti = window.intlTelInput(phoneInput, {
+        initialCountry: "np",
+        separateDialCode: true,
+        preferredCountries: ["np", "in", "us", "gb"],
+    });
+</script>
 </body>
 
 </html>
-```
