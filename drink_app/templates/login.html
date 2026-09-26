@@ -1,21 +1,1826 @@
-{% extends 'base.html' %} {% block title %}Login — Reserve{% endblock %} {% block content %} <section
-    class="auth-section">
-    <div class="auth-card">
-        <div class="text-center mb-4">
-            <h1> Welcome Back </h1>
-            <p> Sign in to your account. </p>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login | Reserve{% endblock %}
+
+{% block content %}
+
+<style>
+
+/* =========================================================
+   RESERVE LOGIN — MODERN SPLIT UI
+========================================================= */
+
+.reserve-login-page {
+    min-height: calc(100vh - 70px);
+    width: 100%;
+
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef3ff 0%,
+            #e8edff 48%,
+            #f8f4ff 100%
+        );
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+}
+
+
+/* =========================================================
+   BACKGROUND DECORATION
+========================================================= */
+
+.reserve-login-page::before {
+    content: "";
+
+    position: absolute;
+
+    width: 600px;
+    height: 600px;
+
+    left: -300px;
+    top: -250px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(69, 84, 180, .25),
+            transparent 68%
+        );
+}
+
+
+.reserve-login-page::after {
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    right: -250px;
+    bottom: -250px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 174, 42, .18),
+            transparent 70%
+        );
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+
+.reserve-login-container {
+
+    width: 100%;
+    max-width: 1400px;
+
+    min-height: 720px;
+
+    margin: auto;
+
+    padding: 30px 45px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.15fr)
+        minmax(390px, .85fr);
+
+    align-items: center;
+
+    gap: 30px;
+
+    position: relative;
+    z-index: 2;
+}
+
+
+/* =========================================================
+   LEFT VISUAL SECTION
+========================================================= */
+
+.reserve-login-visual {
+
+    min-height: 620px;
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding: 50px;
+
+    overflow: hidden;
+
+    border-radius: 35px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #35479f 0%,
+            #4053ad 45%,
+            #25367e 100%
+        );
+
+    box-shadow:
+        0 30px 70px rgba(38, 51, 115, .22);
+}
+
+
+/* Decorative white wave */
+
+.reserve-wave-one {
+
+    position: absolute;
+
+    width: 600px;
+    height: 600px;
+
+    top: -350px;
+    left: -260px;
+
+    border-radius: 50%;
+
+    border: 80px solid rgba(255,255,255,.95);
+
+    opacity: .95;
+}
+
+
+.reserve-wave-two {
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    bottom: -390px;
+    right: -260px;
+
+    border-radius: 50%;
+
+    border: 65px solid rgba(255,255,255,.85);
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.reserve-brand {
+
+    position: relative;
+    z-index: 5;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    width: fit-content;
+
+    color: #fff;
+
+    font-size: 25px;
+
+    font-weight: 800;
+
+    letter-spacing: -.8px;
+}
+
+
+.reserve-brand img {
+
+    width: 48px;
+    height: 48px;
+
+    padding: 7px;
+
+    object-fit: contain;
+
+    border-radius: 14px;
+
+    background: rgba(255,255,255,.95);
+
+    box-shadow:
+        0 12px 25px rgba(0,0,0,.15);
+}
+
+
+.reserve-brand-dot {
+
+    width: 9px;
+    height: 9px;
+
+    margin-left: -7px;
+
+    border-radius: 50%;
+
+    background: #ffb329;
+
+    box-shadow:
+        0 0 0 5px rgba(255,179,41,.18);
+}
+
+
+/* =========================================================
+   LEFT TEXT
+========================================================= */
+
+.reserve-visual-content {
+
+    position: relative;
+    z-index: 5;
+
+    max-width: 550px;
+
+    margin-top: 65px;
+}
+
+
+.reserve-visual-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 9px 15px;
+
+    border-radius: 30px;
+
+    background: rgba(255,255,255,.12);
+
+    border: 1px solid rgba(255,255,255,.20);
+
+    color: #fff;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    backdrop-filter: blur(10px);
+}
+
+
+.reserve-visual-badge i {
+
+    color: #ffb52b;
+}
+
+
+.reserve-visual-content h1 {
+
+    margin: 22px 0 0;
+
+    color: #fff;
+
+    font-size: clamp(
+        42px,
+        5vw,
+        72px
+    );
+
+    line-height: .98;
+
+    letter-spacing: -3px;
+
+    font-weight: 850;
+}
+
+
+.reserve-visual-content h1 span {
+
+    color: #ffb52b;
+}
+
+
+.reserve-visual-content p {
+
+    max-width: 470px;
+
+    margin: 24px 0 0;
+
+    color: rgba(255,255,255,.72);
+
+    font-size: 14px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   VISUAL CARD / LOGO
+========================================================= */
+
+.reserve-visual-center {
+
+    position: absolute;
+
+    right: 8%;
+
+    bottom: 13%;
+
+    z-index: 4;
+
+    width: 210px;
+    height: 210px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.30),
+            rgba(255,255,255,.05) 65%,
+            transparent 70%
+        );
+
+    animation:
+        reserveFloat 4s ease-in-out infinite;
+}
+
+
+.reserve-visual-center::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 150px;
+    height: 150px;
+
+    border-radius: 42px;
+
+    transform: rotate(-8deg);
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff,
+            #f5f7ff
+        );
+
+    box-shadow:
+        0 25px 45px rgba(11,21,65,.25);
+}
+
+
+.reserve-visual-center img {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 105px;
+    height: 105px;
+
+    object-fit: contain;
+}
+
+
+@keyframes reserveFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotate(2deg);
+    }
+
+}
+
+
+/* =========================================================
+   FLOATING DECORATIVE DOTS
+========================================================= */
+
+.reserve-orb {
+
+    position: absolute;
+
+    z-index: 3;
+
+    border-radius: 50%;
+}
+
+
+.reserve-orb-one {
+
+    width: 15px;
+    height: 15px;
+
+    top: 35%;
+
+    right: 20%;
+
+    background: #ffb52b;
+
+    box-shadow:
+        0 0 0 8px rgba(255,181,43,.14);
+}
+
+
+.reserve-orb-two {
+
+    width: 10px;
+    height: 10px;
+
+    bottom: 22%;
+
+    left: 12%;
+
+    background: #fff;
+
+    box-shadow:
+        0 0 0 7px rgba(255,255,255,.12);
+}
+
+
+.reserve-orb-three {
+
+    width: 7px;
+    height: 7px;
+
+    top: 20%;
+
+    right: 38%;
+
+    background: #ff7d72;
+}
+
+
+/* =========================================================
+   LEFT FOOTER
+========================================================= */
+
+.reserve-visual-footer {
+
+    position: absolute;
+
+    left: 50px;
+    bottom: 40px;
+
+    z-index: 5;
+
+    color: rgba(255,255,255,.55);
+
+    font-size: 10px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   RIGHT LOGIN AREA
+========================================================= */
+
+.reserve-login-area {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px;
+}
+
+
+/* =========================================================
+   LOGIN CARD
+========================================================= */
+
+.reserve-login-card {
+
+    width: 100%;
+
+    max-width: 455px;
+
+    padding: 45px 48px 40px;
+
+    position: relative;
+
+    border-radius: 32px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffb326 0%,
+            #ffb52c 45%,
+            #ffad1e 100%
+        );
+
+    box-shadow:
+        15px 18px 0 rgba(71,57,122,.10),
+        0 30px 65px rgba(50,42,90,.18);
+
+    animation:
+        loginCardIn .7s ease both;
+}
+
+
+@keyframes loginCardIn {
+
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+}
+
+
+/* =========================================================
+   CARD DECORATION
+========================================================= */
+
+.reserve-login-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 150px;
+    height: 150px;
+
+    top: -80px;
+    right: -70px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.12);
+}
+
+
+.reserve-login-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    bottom: -50px;
+    left: -45px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.10);
+}
+
+
+/* =========================================================
+   LOGIN HEADER
+========================================================= */
+
+.reserve-login-header {
+
+    position: relative;
+    z-index: 2;
+
+    text-align: center;
+
+    margin-bottom: 27px;
+}
+
+
+.reserve-login-logo {
+
+    width: 58px;
+    height: 58px;
+
+    padding: 8px;
+
+    margin: 0 auto 15px;
+
+    display: block;
+
+    object-fit: contain;
+
+    border-radius: 17px;
+
+    background: rgba(255,255,255,.94);
+
+    box-shadow:
+        0 10px 25px rgba(93,63,0,.12);
+}
+
+
+.reserve-login-header h2 {
+
+    margin: 0;
+
+    color: #141b3d;
+
+    font-size: 29px;
+
+    font-weight: 800;
+
+    letter-spacing: -.8px;
+}
+
+
+.reserve-login-header p {
+
+    margin: 8px 0 0;
+
+    color: rgba(27,31,61,.63);
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   MESSAGES
+========================================================= */
+
+.reserve-login-message {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    gap: 8px;
+
+    padding: 10px 12px;
+
+    margin-bottom: 13px;
+
+    border-radius: 10px;
+
+    background: rgba(255,255,255,.65);
+
+    color: #9f3030;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   FORM GROUP
+========================================================= */
+
+.reserve-field {
+
+    position: relative;
+
+    z-index: 2;
+
+    margin-bottom: 15px;
+}
+
+
+.reserve-field label {
+
+    display: block;
+
+    margin: 0 0 7px 3px;
+
+    color: #343448;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+
+.reserve-input-box {
+
+    position: relative;
+}
+
+
+.reserve-input-box i.input-icon {
+
+    position: absolute;
+
+    left: 16px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #4c428d;
+
+    font-size: 14px;
+
+    z-index: 2;
+}
+
+
+.reserve-input {
+
+    width: 100%;
+
+    height: 49px;
+
+    padding:
+        0 15px 0 43px;
+
+    border: 2px solid transparent;
+
+    border-radius: 30px;
+
+    outline: none;
+
+    background: rgba(255,255,255,.96);
+
+    color: #252743;
+
+    font-size: 11px;
+
+    box-shadow:
+        0 5px 15px rgba(95,67,0,.08);
+
+    transition: .22s ease;
+}
+
+
+.reserve-input:focus {
+
+    background: #fff;
+
+    border-color: rgba(72,63,145,.32);
+
+    box-shadow:
+        0 0 0 4px rgba(255,255,255,.24),
+        0 8px 20px rgba(95,67,0,.10);
+}
+
+
+.reserve-input::placeholder {
+
+    color: #9da0ae;
+}
+
+
+/* Password */
+
+.reserve-password {
+
+    padding-right: 47px;
+}
+
+
+.reserve-eye {
+
+    position: absolute;
+
+    right: 8px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: #51488c;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+
+.reserve-eye:hover {
+
+    background: #f0ebff;
+}
+
+
+/* =========================================================
+   OPTIONS
+========================================================= */
+
+.reserve-options {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin: 3px 3px 22px;
+}
+
+
+.reserve-remember {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: #393746;
+
+    font-size: 9px;
+
+    cursor: pointer;
+}
+
+
+.reserve-remember input {
+
+    width: 14px;
+    height: 14px;
+
+    margin: 0;
+
+    accent-color: #141b59;
+}
+
+
+.reserve-forgot {
+
+    color: #292650;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+
+.reserve-forgot:hover {
+
+    text-decoration: underline;
+
+    color: #141b59;
+}
+
+
+/* =========================================================
+   LOGIN BUTTON
+========================================================= */
+
+.reserve-login-button {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    height: 50px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    border: none;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #101b68,
+            #14247f
+        );
+
+    color: #fff;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 0 rgba(31,30,89,.13),
+        0 12px 25px rgba(31,30,89,.18);
+
+    transition: .25s ease;
+}
+
+
+.reserve-login-button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 0 rgba(31,30,89,.13),
+        0 17px 30px rgba(31,30,89,.23);
+}
+
+
+.reserve-login-button:active {
+
+    transform: translateY(1px);
+
+    box-shadow:
+        0 3px 0 rgba(31,30,89,.13);
+}
+
+
+.reserve-login-button i {
+
+    transition: .2s ease;
+}
+
+
+.reserve-login-button:hover i {
+
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.reserve-social-divider {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin: 25px 0 15px;
+
+    color: rgba(35,34,58,.62);
+
+    font-size: 9px;
+
+    text-align: center;
+}
+
+
+.reserve-social-divider::before,
+.reserve-social-divider::after {
+
+    content: "";
+
+    flex: 1;
+
+    height: 1px;
+
+    background: rgba(42,42,70,.16);
+}
+
+
+/* =========================================================
+   SOCIAL
+========================================================= */
+
+.reserve-social {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+}
+
+
+.reserve-social-btn {
+
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.96);
+
+    color: #26305d;
+
+    text-decoration: none;
+
+    font-size: 16px;
+
+    box-shadow:
+        0 6px 15px rgba(83,60,0,.10);
+
+    transition: .22s ease;
+}
+
+
+.reserve-social-btn:hover {
+
+    transform: translateY(-3px) scale(1.03);
+
+    background: #fff;
+
+    box-shadow:
+        0 10px 22px rgba(83,60,0,.16);
+}
+
+
+.reserve-google {
+    color: #4285f4;
+}
+
+
+.reserve-facebook {
+    color: #1877f2;
+}
+
+
+/* =========================================================
+   SECURITY
+========================================================= */
+
+.reserve-security {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 5px;
+
+    margin-top: 16px;
+
+    color: rgba(35,34,58,.53);
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   REGISTER
+========================================================= */
+
+.reserve-register {
+
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 20px;
+
+    text-align: center;
+
+    color: rgba(35,34,58,.65);
+
+    font-size: 10px;
+}
+
+
+.reserve-register a {
+
+    color: #171b5f;
+
+    font-weight: 800;
+
+    text-decoration: none;
+}
+
+
+.reserve-register a:hover {
+
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .reserve-login-container {
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(360px, .85fr);
+
+        padding: 25px;
+    }
+
+
+    .reserve-login-visual {
+
+        padding: 40px;
+
+        min-height: 650px;
+    }
+
+
+    .reserve-visual-center {
+
+        right: 5%;
+    }
+
+}
+
+
+@media (max-width: 850px) {
+
+    .reserve-login-page {
+
+        min-height: 100vh;
+    }
+
+
+    .reserve-login-container {
+
+        grid-template-columns: 1fr;
+
+        max-width: 650px;
+
+        padding: 20px;
+    }
+
+
+    .reserve-login-visual {
+
+        min-height: 400px;
+
+        border-radius: 30px;
+
+        padding: 35px;
+    }
+
+
+    .reserve-visual-content {
+
+        margin-top: 40px;
+    }
+
+
+    .reserve-visual-content h1 {
+
+        font-size: 48px;
+    }
+
+
+    .reserve-visual-center {
+
+        width: 150px;
+        height: 150px;
+
+        right: 8%;
+        bottom: 8%;
+    }
+
+
+    .reserve-visual-center::before {
+
+        width: 115px;
+        height: 115px;
+    }
+
+
+    .reserve-visual-center img {
+
+        width: 78px;
+        height: 78px;
+    }
+
+
+    .reserve-visual-footer {
+
+        left: 35px;
+        bottom: 25px;
+    }
+
+
+    .reserve-login-area {
+
+        padding: 5px 0 25px;
+    }
+
+}
+
+
+@media (max-width: 520px) {
+
+    .reserve-login-container {
+
+        padding: 10px;
+    }
+
+
+    .reserve-login-visual {
+
+        min-height: 390px;
+
+        padding: 27px;
+
+        border-radius: 25px;
+    }
+
+
+    .reserve-brand {
+
+        font-size: 21px;
+    }
+
+
+    .reserve-brand img {
+
+        width: 40px;
+        height: 40px;
+    }
+
+
+    .reserve-visual-content {
+
+        margin-top: 35px;
+    }
+
+
+    .reserve-visual-content h1 {
+
+        font-size: 39px;
+
+        letter-spacing: -2px;
+    }
+
+
+    .reserve-visual-content p {
+
+        font-size: 11px;
+
+        max-width: 300px;
+    }
+
+
+    .reserve-visual-center {
+
+        width: 115px;
+        height: 115px;
+
+        right: 7%;
+        bottom: 12%;
+    }
+
+
+    .reserve-visual-center::before {
+
+        width: 90px;
+        height: 90px;
+
+        border-radius: 27px;
+    }
+
+
+    .reserve-visual-center img {
+
+        width: 60px;
+        height: 60px;
+    }
+
+
+    .reserve-login-card {
+
+        padding: 35px 24px 30px;
+
+        border-radius: 27px;
+    }
+
+
+    .reserve-login-header h2 {
+
+        font-size: 25px;
+    }
+
+
+    .reserve-options {
+
+        margin-bottom: 18px;
+    }
+
+}
+
+
+@media (max-width: 370px) {
+
+    .reserve-login-visual {
+
+        min-height: 350px;
+    }
+
+
+    .reserve-visual-content h1 {
+
+        font-size: 34px;
+    }
+
+
+    .reserve-visual-center {
+
+        display: none;
+    }
+
+
+    .reserve-login-card {
+
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+}
+
+</style>
+
+
+<!-- =========================================================
+     LOGIN PAGE
+========================================================= -->
+
+<section class="reserve-login-page">
+
+    <div class="reserve-login-container">
+
+
+        <!-- =================================================
+             LEFT VISUAL
+        ================================================== -->
+
+        <div class="reserve-login-visual">
+
+
+            <!-- Decorative Waves -->
+
+            <div class="reserve-wave-one"></div>
+
+            <div class="reserve-wave-two"></div>
+
+
+            <!-- Decorative Orbs -->
+
+            <div class="reserve-orb reserve-orb-one"></div>
+
+            <div class="reserve-orb reserve-orb-two"></div>
+
+            <div class="reserve-orb reserve-orb-three"></div>
+
+
+            <!-- Brand -->
+
+            <div class="reserve-brand">
+
+                <img
+                    src="{% static 'images/ghar logo.png' %}"
+                    alt="Reserve Logo"
+                >
+
+
+                <span class="reserve-brand-dot"></span>
+
+            </div>
+
+
+            <!-- Main Text -->
+
+            <div class="reserve-visual-content">
+
+                <div class="reserve-visual-badge">
+
+                    <i class="bi bi-stars"></i>
+
+                    Your shopping experience starts here
+
+                </div>
+
+
+                <h1>
+
+                    Welcome<br>
+
+                    <span>Back.</span>
+
+                </h1>
+
+
+                <p>
+
+                    Access your account, discover your favorites,
+                    manage your orders and continue your Reserve
+                    experience from where you left off.
+
+                </p>
+
+            </div>
+
+
+            <!-- Center Logo -->
+
+            <div class="reserve-visual-center">
+
+                <img
+                    src="{% static 'images/ghar logo.png' %}"
+                    alt="Reserve"
+                >
+
+            </div>
+
+
+            <!-- Footer -->
+
+            <div class="reserve-visual-footer">
+
+                Secure account access · Personalized experience · Reserve
+
+            </div>
+
+
         </div>
-        <form method="POST"> {% csrf_token %} <div class="mb-3"> <label class="form-label"> Email </label> <input
-                    type="email" name="email" class="form-control" required> </div>
-            <div class="mb-3"> <label class="form-label"> Password </label> <input type="password" name="password"
-                    class="form-control" required> </div>
-            <div class="d-flex justify-content-between mb-4">
-                <div class="form-check"> <input type="checkbox" class="form-check-input" id="remember"> <label
-                        class="form-check-label" for="remember"> Remember me </label> </div> <a href="#"> Forgot
-                    password? </a>
-            </div> <button class="btn btn-dark w-100 btn-lg"> Login </button>
-        </form>
-        <p class="text-center mt-4"> Don't have an account? <a href="{% url 'register' %}"> Create one </a> </p>
+
+
+        <!-- =================================================
+             RIGHT LOGIN
+        ================================================== -->
+
+        <div class="reserve-login-area">
+
+
+            <div class="reserve-login-card">
+
+
+                <!-- Header -->
+
+                <div class="reserve-login-header">
+
+                    <img
+                        src="{% static 'images/ghar logo.png' %}"
+                        alt="Reserve Logo"
+                        class="reserve-login-logo"
+                    >
+
+
+                    <h2>
+                        Login to continue
+                    </h2>
+
+
+                    <p>
+                        Welcome back! Please enter your details.
+                    </p>
+
+                </div>
+
+
+                <!-- Django Messages -->
+
+                {% if messages %}
+
+                    {% for message in messages %}
+
+                        <div class="reserve-login-message">
+
+                            <i class="bi bi-exclamation-circle"></i>
+
+                            <span>
+                                {{ message }}
+                            </span>
+
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+
+                <!-- LOGIN FORM -->
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+
+                    <!-- EMAIL -->
+
+                    <div class="reserve-field">
+
+                        <label for="email">
+                            Username / Email
+                        </label>
+
+
+                        <div class="reserve-input-box">
+
+                            <i
+                                class="bi bi-person-fill input-icon"
+                            ></i>
+
+
+                            <input
+                                type="email"
+                                name="email"
+                                id="email"
+                                class="reserve-input"
+                                placeholder="Enter your email"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="reserve-field">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+
+                        <div class="reserve-input-box">
+
+                            <i
+                                class="bi bi-lock-fill input-icon"
+                            ></i>
+
+
+                            <input
+                                type="password"
+                                name="password"
+                                id="password"
+                                class="reserve-input reserve-password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+
+                            <button
+                                type="button"
+                                class="reserve-eye"
+                                id="toggleLoginPassword"
+                                aria-label="Show password"
+                            >
+
+                                <i
+                                    class="bi bi-eye"
+                                    id="loginEyeIcon"
+                                ></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- OPTIONS -->
+
+                    <div class="reserve-options">
+
+
+                        <label class="reserve-remember">
+
+                            <input
+                                type="checkbox"
+                                name="remember_me"
+                            >
+
+                            <span>
+                                Remember me
+                            </span>
+
+                        </label>
+
+
+                        <a
+                            href="{% url 'password_reset' %}"
+                            class="reserve-forgot"
+                        >
+                            Forgot password?
+                        </a>
+
+
+                    </div>
+
+
+                    <!-- LOGIN -->
+
+                    <button
+                        type="submit"
+                        class="reserve-login-button"
+                    >
+
+                        <span>
+                            Login
+                        </span>
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </button>
+
+
+                    <!-- SOCIAL DIVIDER -->
+
+                    <div class="reserve-social-divider">
+
+                        <span>
+                            or sign up using
+                        </span>
+
+                    </div>
+
+
+                    <!-- SOCIAL -->
+
+                    <div class="reserve-social">
+
+
+                        <a
+                            href="#"
+                            class="reserve-social-btn"
+                            aria-label="Google"
+                        >
+
+                            <i
+                                class="bi bi-google reserve-google"
+                            ></i>
+
+                        </a>
+
+
+                        <a
+                            href="#"
+                            class="reserve-social-btn"
+                            aria-label="Facebook"
+                        >
+
+                            <i
+                                class="bi bi-facebook reserve-facebook"
+                            ></i>
+
+                        </a>
+
+
+                    </div>
+
+
+                    <!-- SECURITY -->
+
+                    <div class="reserve-security">
+
+                        <i class="bi bi-shield-lock-fill"></i>
+
+                        Secure and encrypted login
+
+                    </div>
+
+
+                </form>
+
+
+                <!-- REGISTER -->
+
+                <div class="reserve-register">
+
+                    Don't have an account?
+
+                    <a href="{% url 'register' %}">
+                        Create an account
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
     </div>
+
 </section>
+
+
+<!-- =========================================================
+     PASSWORD TOGGLE
+========================================================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const password =
+        document.getElementById("password");
+
+    const toggle =
+        document.getElementById("toggleLoginPassword");
+
+    const icon =
+        document.getElementById("loginEyeIcon");
+
+
+    if (password && toggle && icon) {
+
+        toggle.addEventListener("click", function () {
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                icon.classList.remove("bi-eye");
+
+                icon.classList.add("bi-eye-slash");
+
+                toggle.setAttribute(
+                    "aria-label",
+                    "Hide password"
+                );
+
+            } else {
+
+                password.type = "password";
+
+                icon.classList.remove("bi-eye-slash");
+
+                icon.classList.add("bi-eye");
+
+                toggle.setAttribute(
+                    "aria-label",
+                    "Show password"
+                );
+
+            }
+
+        });
+
+    }
+
+});
+
+</script>
+
 {% endblock %}

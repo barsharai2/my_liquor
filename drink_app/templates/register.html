@@ -1,21 +1,1352 @@
-{% extends 'base.html' %} {% block title %}Create Account — Reserve{% endblock %} {% block content %} <section
-    class="auth-section">
-    <div class="auth-card">
-        <div class="text-center mb-4">
-            <h1> Create Account </h1>
-            <p> Join Reserve. </p>
-        </div>
-        <form method="POST"> {% csrf_token %} <div class="mb-3"> <label class="form-label"> Full Name </label> <input
-                    type="text" name="name" class="form-control" required> </div>
-            <div class="mb-3"> <label class="form-label"> Email </label> <input type="email" name="email"
-                    class="form-control" required> </div>
-            <div class="mb-3"> <label class="form-label"> Password </label> <input type="password" name="password"
-                    class="form-control" required> </div>
-            <div class="form-check mb-4"> <input class="form-check-input" type="checkbox" id="terms" required> <label
-                    class="form-check-label" for="terms"> I agree to the terms and privacy policy. </label> </div>
-            <button class="btn btn-dark w-100 btn-lg"> Create Account </button>
-        </form>
-        <p class="text-center mt-4"> Already have an account? <a href="{% url 'login' %}"> Login </a> </p>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Create Account — Reserve{% endblock %}
+
+{% block content %}
+
+<style>
+/* =========================================================
+   RESERVE — MODERN SIGN UP PAGE
+   Premium Liquor Ecommerce UI
+========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --reserve-gold: #b78932;
+    --reserve-gold-dark: #956c1f;
+    --reserve-black: #151515;
+    --reserve-cream: #f7f5f0;
+    --reserve-text: #242424;
+    --reserve-muted: #77736d;
+    --reserve-border: #e1ddd5;
+    --reserve-white: #ffffff;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.reserve-signup-page {
+    min-height: calc(100vh - 70px);
+
+    padding: 45px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(183, 137, 50, 0.08),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(183, 137, 50, 0.06),
+            transparent 25%
+        ),
+        var(--reserve-cream);
+
+    font-family:
+        "DM Sans",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    color: var(--reserve-text);
+}
+
+
+/* =========================================================
+   MAIN CARD
+========================================================= */
+
+.reserve-signup-container {
+    width: min(1060px, 100%);
+
+    display: grid;
+
+    grid-template-columns:
+        0.82fr
+        1.18fr;
+
+    background: var(--reserve-white);
+
+    border: 1px solid #e7e2da;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 25px 70px rgba(31, 25, 17, 0.10);
+}
+
+
+/* =========================================================
+   LEFT BRAND PANEL
+========================================================= */
+
+.reserve-signup-brand {
+    min-height: 650px;
+
+    padding: 48px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            #111111,
+            #211c15
+        );
+
+    color: white;
+}
+
+
+/* Decorative circles */
+
+.reserve-signup-brand::before {
+    content: "";
+
+    position: absolute;
+
+    width: 340px;
+    height: 340px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(183,137,50,.20);
+
+    right: -170px;
+    top: -140px;
+}
+
+.reserve-signup-brand::after {
+    content: "";
+
+    position: absolute;
+
+    width: 230px;
+    height: 230px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(183,137,50,.12);
+
+    left: -130px;
+    bottom: -100px;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.reserve-brand {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+}
+
+.reserve-brand img {
+    width: 50px;
+    height: 50px;
+
+    object-fit: contain;
+
+    padding: 5px;
+
+    box-sizing: border-box;
+
+    background: white;
+
+    border-radius: 12px;
+}
+
+.reserve-brand-name {
+    font-family:
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 21px;
+
+    line-height: 1.1;
+
+    font-weight: 800;
+}
+
+.reserve-brand-name small {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #c79a46;
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 1.7px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   BRAND CONTENT
+========================================================= */
+
+.reserve-brand-content {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 360px;
+}
+
+.reserve-eyebrow {
+    color: #c79a46;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 17px;
+}
+
+.reserve-brand-content h1 {
+    margin: 0;
+
+    font-family:
+        "Noto Sans Devanagari",
+        Georgia,
+        serif;
+
+    font-size: 42px;
+
+    line-height: 1.18;
+
+    letter-spacing: -1.4px;
+
+    font-weight: 800;
+}
+
+.reserve-brand-content h1 span {
+    color: #c99b47;
+}
+
+.reserve-brand-content p {
+    margin: 20px 0 0;
+
+    color: rgba(255,255,255,.62);
+
+    font-family:
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 12px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   BENEFITS
+========================================================= */
+
+.reserve-benefits {
+    position: relative;
+
+    z-index: 2;
+
+    display: grid;
+
+    gap: 12px;
+}
+
+.reserve-benefit {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    color: rgba(255,255,255,.76);
+
+    font-size: 10px;
+}
+
+.reserve-benefit-icon {
+    width: 31px;
+    height: 31px;
+
+    display: grid;
+
+    place-items: center;
+
+    border: 1px solid rgba(199,154,70,.35);
+
+    border-radius: 8px;
+
+    color: #c79a46;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   LEGAL NOTICE
+========================================================= */
+
+.reserve-brand-legal {
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 22px;
+
+    padding-top: 19px;
+
+    border-top: 1px solid rgba(255,255,255,.11);
+
+    color: rgba(255,255,255,.39);
+
+    font-family:
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 8px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FORM AREA
+========================================================= */
+
+.reserve-signup-form-area {
+    padding: 52px 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    box-sizing: border-box;
+}
+
+.reserve-signup-form {
+    width: 100%;
+
+    max-width: 440px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.reserve-form-heading {
+    margin-bottom: 28px;
+}
+
+.reserve-form-heading h2 {
+    margin: 0;
+
+    font-family:
+        "Noto Sans Devanagari",
+        Georgia,
+        serif;
+
+    font-size: 30px;
+
+    line-height: 1.25;
+
+    letter-spacing: -.7px;
+
+    font-weight: 800;
+}
+
+.reserve-form-heading p {
+    margin: 8px 0 0;
+
+    color: var(--reserve-muted);
+
+    font-family:
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 11px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FORM GROUP
+========================================================= */
+
+.reserve-field {
+    margin-bottom: 17px;
+}
+
+.reserve-label-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 7px;
+}
+
+.reserve-label {
+    font-family:
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    color: #2b2b2b;
+}
+
+.reserve-required {
+    color: var(--reserve-gold-dark);
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.reserve-input-wrapper {
+    position: relative;
+}
+
+.reserve-input-icon {
+    position: absolute;
+
+    left: 15px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #99938b;
+
+    font-size: 14px;
+
+    pointer-events: none;
+}
+
+.reserve-input {
+    width: 100%;
+
+    height: 52px;
+
+    box-sizing: border-box;
+
+    padding:
+        0
+        15px
+        0
+        43px;
+
+    border:
+        1px solid var(--reserve-border);
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: white;
+
+    color: var(--reserve-text);
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    font-size: 12px;
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+.reserve-input::placeholder {
+    color: #aaa59d;
+}
+
+.reserve-input:hover {
+    border-color: #c9c2b7;
+}
+
+.reserve-input:focus {
+    border-color: var(--reserve-gold);
+
+    box-shadow:
+        0 0 0 3px rgba(183,137,50,.10);
+}
+
+
+/* =========================================================
+   PASSWORD
+========================================================= */
+
+.reserve-password {
+    padding-right: 50px;
+}
+
+.reserve-password-toggle {
+    position: absolute;
+
+    right: 5px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 40px;
+    height: 40px;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: #8d8982;
+
+    cursor: pointer;
+}
+
+.reserve-password-toggle:hover {
+    background: #f4f1eb;
+
+    color: #333;
+}
+
+
+/* =========================================================
+   PASSWORD HINT
+========================================================= */
+
+.reserve-password-hint {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin-top: 7px;
+
+    color: #96918a;
+
+    font-size: 9px;
+}
+
+.reserve-password-hint i {
+    color: var(--reserve-gold);
+}
+
+
+/* =========================================================
+   TERMS
+========================================================= */
+
+.reserve-terms {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    margin: 21px 0;
+
+    color: #77736d;
+
+    font-family:
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+
+    cursor: pointer;
+}
+
+.reserve-terms input {
+    width: 15px;
+    height: 15px;
+
+    flex-shrink: 0;
+
+    margin-top: 1px;
+
+    accent-color: var(--reserve-gold);
+}
+
+.reserve-terms a {
+    color: var(--reserve-gold-dark);
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+.reserve-terms a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   CREATE BUTTON
+========================================================= */
+
+.reserve-create-button {
+    width: 100%;
+
+    height: 53px;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    background: var(--reserve-black);
+
+    color: white;
+
+    font-family:
+        "Noto Sans Devanagari",
+        "DM Sans",
+        sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+}
+
+.reserve-create-button:hover {
+    background: #2a2a2a;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 9px 22px rgba(0,0,0,.14);
+}
+
+.reserve-create-button:active {
+    transform: translateY(0);
+}
+
+.reserve-button-content {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+
+/* =========================================================
+   LOGIN LINK
+========================================================= */
+
+.reserve-login-link {
+    margin-top: 23px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #ebe7e0;
+
+    text-align: center;
+
+    color: #817c74;
+
+    font-family:
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 10px;
+}
+
+.reserve-login-link a {
+    color: var(--reserve-gold-dark);
+
+    font-weight: 800;
+
+    text-decoration: none;
+}
+
+.reserve-login-link a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   SECURITY
+========================================================= */
+
+.reserve-security {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    margin-top: 18px;
+
+    color: #aaa49b;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   AGE / LEGAL NOTICE
+========================================================= */
+
+.reserve-age-note {
+    margin-top: 15px;
+
+    padding: 10px 12px;
+
+    border-radius: 8px;
+
+    background: #f7f5f1;
+
+    color: #8b867e;
+
+    font-family:
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 8px;
+
+    line-height: 1.7;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .reserve-signup-container {
+        grid-template-columns: 1fr;
+
+        max-width: 600px;
+    }
+
+    .reserve-signup-brand {
+        min-height: 390px;
+
+        padding: 35px;
+    }
+
+    .reserve-brand-content {
+        margin-top: 40px;
+
+        margin-bottom: 40px;
+    }
+
+    .reserve-brand-content h1 {
+        font-size: 37px;
+    }
+
+    .reserve-signup-form-area {
+        padding: 45px 40px 50px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 520px) {
+
+    .reserve-signup-page {
+        padding: 0;
+
+        min-height: 100vh;
+
+        align-items: stretch;
+    }
+
+    .reserve-signup-container {
+        border: 0;
+
+        border-radius: 0;
+
+        box-shadow: none;
+    }
+
+    .reserve-signup-brand {
+        min-height: 360px;
+
+        padding: 27px 23px;
+    }
+
+    .reserve-brand img {
+        width: 43px;
+        height: 43px;
+    }
+
+    .reserve-brand-name {
+        font-size: 18px;
+    }
+
+    .reserve-brand-content {
+        margin-top: 28px;
+
+        margin-bottom: 28px;
+    }
+
+    .reserve-brand-content h1 {
+        font-size: 33px;
+
+        letter-spacing: -1px;
+    }
+
+    .reserve-brand-content p {
+        font-size: 10px;
+    }
+
+    .reserve-signup-form-area {
+        padding: 38px 23px 45px;
+    }
+
+    .reserve-form-heading h2 {
+        font-size: 27px;
+    }
+
+    .reserve-form-heading p {
+        font-size: 10px;
+    }
+}
+</style>
+
+
+<section class="reserve-signup-page">
+
+    <div class="reserve-signup-container">
+
+
+        <!-- =================================================
+             BRAND PANEL
+        ================================================== -->
+
+        <aside class="reserve-signup-brand">
+
+
+            <!-- BRAND -->
+
+            <div class="reserve-brand">
+
+                <img
+                    src="{% static 'images/ghar logo.png' %}"
+                    alt="मन्दिरघर"
+                >
+
+                <div class="reserve-brand-name">
+
+                    मन्दिरघर
+
+                    <small>
+                        Premium Spirits & Beverages
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTENT -->
+
+            <div class="reserve-brand-content">
+
+                <div class="reserve-eyebrow">
+                    Join our community
+                </div>
+
+                <h1>
+
+                    तपाईंको
+                    <span>premium</span>
+                    shopping experience सुरु गरौँ।
+
+                </h1>
+
+                <p>
+
+                    Account बनाएर आफ्नो orders,
+                    offers तथा मनपर्ने products
+                    अझ सजिलै व्यवस्थापन गर्नुहोस्।
+
+                </p>
+
+            </div>
+
+
+            <!-- BENEFITS -->
+
+            <div>
+
+                <div class="reserve-benefits">
+
+                    <div class="reserve-benefit">
+
+                        <span class="reserve-benefit-icon">
+                            <i class="bi bi-box-seam"></i>
+                        </span>
+
+                        <span>
+                            सजिलो order management
+                        </span>
+
+                    </div>
+
+
+                    <div class="reserve-benefit">
+
+                        <span class="reserve-benefit-icon">
+                            <i class="bi bi-tag"></i>
+                        </span>
+
+                        <span>
+                            Exclusive offers & deals
+                        </span>
+
+                    </div>
+
+
+                    <div class="reserve-benefit">
+
+                        <span class="reserve-benefit-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </span>
+
+                        <span>
+                            Secure account protection
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="reserve-brand-legal">
+
+                    जिम्मेवारीपूर्वक सेवन गर्नुहोस्।
+                    मदिराजन्य उत्पादनको खरिद तथा
+                    डेलिभरीमा लागू हुने उमेर र स्थानीय
+                    कानुनी आवश्यकताहरू पालना गर्नुहोस्।
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =================================================
+             SIGNUP FORM
+        ================================================== -->
+
+        <main class="reserve-signup-form-area">
+
+            <div class="reserve-signup-form">
+
+
+                <!-- HEADING -->
+
+                <div class="reserve-form-heading">
+
+                    <h2>
+                        Account बनाउनुहोस्
+                    </h2>
+
+                    <p>
+                        केही जानकारी भरेर आफ्नो
+                        Reserve account सुरु गर्नुहोस्।
+                    </p>
+
+                </div>
+
+
+                <!-- FORM -->
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+
+                    <!-- FULL NAME -->
+
+                    <div class="reserve-field">
+
+                        <div class="reserve-label-row">
+
+                            <label
+                                class="reserve-label"
+                                for="name"
+                            >
+                                Full Name
+                            </label>
+
+                            <span class="reserve-required">
+                                Required *
+                            </span>
+
+                        </div>
+
+
+                        <div class="reserve-input-wrapper">
+
+                            <i
+                                class="bi bi-person reserve-input-icon"
+                            ></i>
+
+                            <input
+                                type="text"
+                                name="name"
+                                id="name"
+                                class="reserve-input"
+                                placeholder="Enter your full name"
+                                autocomplete="name"
+                                required
+                                aria-required="true"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="reserve-field">
+
+                        <div class="reserve-label-row">
+
+                            <label
+                                class="reserve-label"
+                                for="email"
+                            >
+                                Email Address
+                            </label>
+
+                            <span class="reserve-required">
+                                Required *
+                            </span>
+
+                        </div>
+
+
+                        <div class="reserve-input-wrapper">
+
+                            <i
+                                class="bi bi-envelope reserve-input-icon"
+                            ></i>
+
+                            <input
+                                type="email"
+                                name="email"
+                                id="email"
+                                class="reserve-input"
+                                placeholder="you@example.com"
+                                autocomplete="email"
+                                inputmode="email"
+                                required
+                                aria-required="true"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="reserve-field">
+
+                        <div class="reserve-label-row">
+
+                            <label
+                                class="reserve-label"
+                                for="password"
+                            >
+                                Password
+                            </label>
+
+                            <span class="reserve-required">
+                                Required *
+                            </span>
+
+                        </div>
+
+
+                        <div class="reserve-input-wrapper">
+
+                            <i
+                                class="bi bi-lock reserve-input-icon"
+                            ></i>
+
+                            <input
+                                type="password"
+                                name="password"
+                                id="password"
+                                class="reserve-input reserve-password"
+                                placeholder="Create a secure password"
+                                autocomplete="new-password"
+                                minlength="8"
+                                required
+                                aria-required="true"
+                            >
+
+
+                            <button
+                                type="button"
+                                class="reserve-password-toggle"
+                                id="toggleSignupPassword"
+                                aria-label="Show password"
+                            >
+
+                                <i
+                                    class="bi bi-eye"
+                                    id="signupEyeIcon"
+                                ></i>
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="reserve-password-hint">
+
+                            <i class="bi bi-info-circle"></i>
+
+                            <span>
+                                Use at least 8 characters for better security.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TERMS -->
+
+                    <label
+                        class="reserve-terms"
+                        for="terms"
+                    >
+
+                        <input
+                            type="checkbox"
+                            id="terms"
+                            name="terms"
+                            required
+                            aria-required="true"
+                        >
+
+                        <span>
+
+                            I agree to the
+                            <a href="#">
+                                Terms & Conditions
+                            </a>
+                            and
+                            <a href="#">
+                                Privacy Policy
+                            </a>.
+
+                        </span>
+
+                    </label>
+
+
+                    <!-- CREATE ACCOUNT -->
+
+                    <button
+                        type="submit"
+                        class="reserve-create-button"
+                    >
+
+                        <span class="reserve-button-content">
+
+                            <span>
+                                Account बनाउनुहोस्
+                            </span>
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </span>
+
+                    </button>
+
+                </form>
+
+
+                <!-- LOGIN -->
+
+                <div class="reserve-login-link">
+
+                    पहिले नै account छ?
+
+                    <a href="{% url 'login' %}">
+                        Login गर्नुहोस्
+                    </a>
+
+                </div>
+
+
+                <!-- SECURITY -->
+
+                <div class="reserve-security">
+
+                    <i class="bi bi-shield-lock"></i>
+
+                    <span>
+                        Your information is securely protected
+                    </span>
+
+                </div>
+
+
+                <!-- AGE NOTICE -->
+
+                <div class="reserve-age-note">
+
+                    मदिराजन्य उत्पादन खरिद गर्दा लागू हुने
+                    उमेर तथा स्थानीय कानुनी आवश्यकताहरू
+                    पालना गर्नुहोस्।
+
+                </div>
+
+            </div>
+
+        </main>
+
     </div>
+
 </section>
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const password =
+            document.getElementById(
+                "password"
+            );
+
+        const toggle =
+            document.getElementById(
+                "toggleSignupPassword"
+            );
+
+        const icon =
+            document.getElementById(
+                "signupEyeIcon"
+            );
+
+
+        if (
+            password &&
+            toggle &&
+            icon
+        ) {
+
+            toggle.addEventListener(
+                "click",
+                function () {
+
+                    const hidden =
+                        password.type === "password";
+
+
+                    password.type =
+                        hidden
+                            ? "text"
+                            : "password";
+
+
+                    icon.classList.toggle(
+                        "bi-eye",
+                        !hidden
+                    );
+
+                    icon.classList.toggle(
+                        "bi-eye-slash",
+                        hidden
+                    );
+
+
+                    toggle.setAttribute(
+                        "aria-label",
+                        hidden
+                            ? "Hide password"
+                            : "Show password"
+                    );
+
+                }
+            );
+
+        }
+
+    }
+);
+
+</script>
+
 {% endblock %}

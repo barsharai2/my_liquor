@@ -45,9 +45,9 @@
             <!-- Logo -->
             <a class="navbar-brand" href="{% url 'index' %}">
                 <span class="brand-icon">
-                    <i class="bi bi-cup-straw"></i>
+                    <i class=""></i>
                 </span>
-                BARSHA
+                <img src="{% static 'images/ghar logo.png' %}" width="90px" height="auto" alt="logo">
             </a>
 
 
@@ -185,7 +185,7 @@
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == '/brands/' %}active{% endif %}"
                             href="{% url 'brands' %}">
-                             Brands </a>
+                            Brands </a>
                     </li>
 
 
@@ -242,26 +242,15 @@
 
 
                 <!-- ACCOUNT -->
-                <div class="navbar-actions">
-
-                    <a href="{% url 'login' %}" class="nav-icon-link" title="Login">
-
-                        <i class="bi bi-person"></i>
-
-                    </a>
-
-
-                    <a href="{% url 'cart' %}" class="nav-icon-link position-relative" title="Cart">
-
-                        <i class="bi bi-bag"></i>
-
-                        <span class="cart-count">
-                            0
-                        </span>
-
-                    </a>
-
-                </div>
+                <div class="navbar-actions d-flex align-items-center gap-2"> {% if user.is_authenticated %} <a href="#"
+                        class="btn btn-outline-light btn-sm"> <i class="bi bi-person-circle me-1"></i> Account </a> <a
+                        href="{% url 'logout' %}" class="btn btn-warning btn-sm"> <i
+                            class="bi bi-box-arrow-right me-1"></i> Logout </a> {% else %} <a href="{% url 'login' %}"
+                        class="btn btn-outline-light btn-sm"> <i class="bi bi-box-arrow-in-right me-1"></i> Login </a>
+                    {% endif %} <a href="{% url 'cart' %}" class="btn btn-outline-light position-relative"> <i
+                            class="bi bi-bag"></i> <span
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
+                            0 </span> </a> </div>
 
             </div>
 
@@ -507,15 +496,15 @@
     {% block extra_js %}{% endblock %}
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/js/intlTelInput.min.js"></script>
 
-<script>
-    const phoneInput = document.querySelector("#contact_phone");
+    <script>
+        const phoneInput = document.querySelector("#contact_phone");
 
-    const iti = window.intlTelInput(phoneInput, {
-        initialCountry: "np",
-        separateDialCode: true,
-        preferredCountries: ["np", "in", "us", "gb"],
-    });
-</script>
+        const iti = window.intlTelInput(phoneInput, {
+            initialCountry: "np",
+            separateDialCode: true,
+            preferredCountries: ["np", "in", "us", "gb"],
+        });
+    </script>
 </body>
 
 </html>

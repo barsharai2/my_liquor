@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .models import *
 from django.db.models import Count
+from django.contrib.auth.decorators import login_required
+
 
 
 # Create your views here.
@@ -222,6 +224,39 @@ def login(request):
         request,
         "login.html"
     )
+
+
+def log_out(request):
+
+    logout(request)
+
+    return redirect('login')
+
+@login_required(login_url='login_part')
+def pass_change(request):
+    form=PasswordChangeForm(user=request.user)
+    if request.method == 'POST':
+        form=PasswordChangeForm(user=request.user,data=request.POST)
+        
+        if form.is_valid():
+
+            form.save()
+
+            messages.success(
+                request,
+                'Your password has been changed successfully.'
+            )
+
+            return redirect('profile')
+
+    return render(
+        request,
+        'profile/changepassword.html',
+        {
+            'form': form
+        }
+    )
+
 
 
 # =========================================================
@@ -470,3 +505,4 @@ def offers(request):
     return render(request, 'offer.html', {
         'offers': offers
     })
+
