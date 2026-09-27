@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from .models import *
+from decimal import Decimal, InvalidOperation
 from django.db.models import Count
+from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
-
-
+from django.core.paginator import Paginator
 
 # Create your views here.
 from django.shortcuts import render, redirect, get_object_or_404
@@ -44,30 +45,112 @@ def index(request):
 # PRODUCTS / SHOP
 # =========================================================
 
+
+
+
 def product(request):
-    """
-    Product listing + search
-    """
 
     query = request.GET.get("q", "").strip()
+    category = request.GET.get("category", "").strip()
+    min_price = request.GET.get("min", "").strip()
+    max_price = request.GET.get("max", "").strip()
 
     products = Product.objects.all()
 
-    # Search
+    # SEARCH
     if query:
         products = products.filter(
             name__icontains=query
         )
 
+    # CATEGORY
+    if category and category != "all":
+        products = products.filter(
+            category=category
+        )
+
+    # MIN PRICE
+    if min_price:
+        try:
+            products = products.filter(
+                price__gte=Decimal(min_price)
+            )
+        except (InvalidOperation, ValueError):
+            pass
+
+    # MAX PRICE
+    if max_price:
+        try:
+            products = products.filter(
+                price__lte=Decimal(max_price)
+            )
+        except (InvalidOperation, ValueError):
+            pass
+
+    # PAGINATION
+    paginator = Paginator(products, 9)
+
+    page_number = request.GET.get("page")
+
+    products = paginator.get_page(page_number)
+
+    # CATEGORIES
+    category_values = (
+        Product.objects
+        .values_list("category", flat=True)
+        .distinct()
+        .order_by("category")
+    )
+
+    categories = []
+
+    for value in category_values:
+
+        if value:
+
+            categories.append({
+                "value": value,
+                "display": value.replace("-", " ").title(),
+                "count": Product.objects.filter(
+                    category=value
+                ).count(),
+            })
+
     context = {
         "products": products,
+
         "query": query,
+
+        "categories": categories,
+
+        "total_products":
+            Product.objects.count(),
+
+        "current_category":
+            category,
+
+        "min_price":
+            min_price,
+
+        "max_price":
+            max_price,
     }
 
-    return render(request, "products.html", context)
+   
+    if request.headers.get("HX-Request"):
 
+        return render(
+            request,
+            "products/product_list.html",
+            context
+        )
 
-# =========================================================
+    return render(
+        request,
+        "products.html",
+        context
+    )
+
 # PRODUCT DETAIL
 # =========================================================
 
@@ -442,17 +525,38 @@ def offers (request):
 # product-shop
 def shop(request):
 
-    category = request.GET.get("category")
+    # GET PARAMETERS
+    query = request.GET.get("q", "").strip()
+    category = request.GET.get("category", "").strip()
 
+    # GET ALL ACTIVE PRODUCTS
     products = Shop.objects.filter(
         is_active=True
     )
 
-    if category:
+    # SEARCH
+    if query:
+        products = products.filter(
+            name__icontains=query
+        )
+
+    # CATEGORY
+    if category and category != "all":
         products = products.filter(
             category=category
         )
 
+    # --------------------------------
+    # PAGINATION MUST BE LAST
+    # --------------------------------
+
+    paginator = Paginator(products, 9)
+
+    page_number = request.GET.get("page")
+
+    products = paginator.get_page(page_number)
+
+    # CATEGORY COUNTS
     category_counts = (
         Shop.objects
         .filter(is_active=True)
@@ -476,13 +580,25 @@ def shop(request):
 
     context = {
         "products": products,
-        "total_products": products.count(),
+
+        "total_products": Shop.objects.filter(
+            is_active=True
+        ).count(),
+
         "category_counts": category_counts,
+
         "categories": categories,
+
         "selected_category": category,
+
+        "query": query,
     }
 
-    return render(request, "products.html", context)
+    return render(
+        request,
+        "products.html",
+        context
+    )
 
 
 def offers(request):

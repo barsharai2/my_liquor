@@ -85,7 +85,7 @@
                         <ul class="dropdown-menu dropdown-menu-dark">
 
                             <li>
-                                <a class="dropdown-item" href="{% url 'product' %}">
+                                <a class="dropdown-item" href="{% url 'shop' %}">
                                     All Drinks
                                 </a>
                             </li>
@@ -223,20 +223,14 @@
 
 
                 <!-- SEARCH -->
-                <form class="search-form me-lg-3" method="GET" action="{% url 'product' %}">
+                <form action="{% url 'shop' %}" method="GET" class="navbar-search">
 
-                    <div class="input-group">
+                    <input type="search" name="q" placeholder="Search products..."
+                        value="{{ request.GET.q|default:'' }}" autocomplete="off">
 
-                        <input type="search" class="form-control" name="q" placeholder="Search drinks..."
-                            aria-label="Search">
-
-                        <button class="btn btn-gold" type="submit">
-
-                            <i class="bi bi-search"></i>
-
-                        </button>
-
-                    </div>
+                    <button type="submit" aria-label="Search">
+                        <i class="bi bi-search"></i>
+                    </button>
 
                 </form>
 
