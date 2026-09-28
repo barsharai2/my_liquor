@@ -5,6 +5,8 @@ from django.db.models import Count
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.contrib.auth.forms import PasswordChangeForm
+
 
 # Create your views here.
 from django.shortcuts import render, redirect, get_object_or_404
@@ -309,37 +311,38 @@ def login(request):
     )
 
 
-def log_out(request):
 
-    logout(request)
-
-    return redirect('login')
-
-@login_required(login_url='login_part')
+@login_required(login_url="login")
 def pass_change(request):
-    form=PasswordChangeForm(user=request.user)
-    if request.method == 'POST':
-        form=PasswordChangeForm(user=request.user,data=request.POST)
-        
-        if form.is_valid():
 
+    if request.method == "POST":
+        form = PasswordChangeForm(
+            user=request.user,
+            data=request.POST
+        )
+
+        if form.is_valid():
             form.save()
 
             messages.success(
                 request,
-                'Your password has been changed successfully.'
+                "Your password has been changed successfully."
             )
 
-            return redirect('profile')
+            return redirect("profile")
+
+    else:
+        form = PasswordChangeForm(
+            user=request.user
+        )
 
     return render(
         request,
-        'profile/changepassword.html',
+        "profile/changepassword.html",
         {
-            'form': form
+            "form": form
         }
     )
-
 
 
 # =========================================================
@@ -414,17 +417,19 @@ def register(request):
 # LOGOUT
 # =========================================================
 
-def user_logout(request):
+def logout_view(request):
 
-    logout(request)
+    if request.method == "POST":
+        logout(request)
 
-    messages.success(
-        request,
-        "You have been logged out."
-    )
+        messages.success(
+            request,
+            "You have been logged out."
+        )
+
+        return redirect("index")
 
     return redirect("index")
-
 
 # =========================================================
 # CART

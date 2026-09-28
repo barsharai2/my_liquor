@@ -4,12 +4,15 @@
 {% block title %}Create Account — Reserve{% endblock %}
 
 {% block content %}
-
+<!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
 <style>
 /* =========================================================
    RESERVE — MODERN SIGN UP PAGE
    Premium Liquor Ecommerce UI
 ========================================================= */
+
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap');
 
@@ -58,6 +61,54 @@
 
     color: var(--reserve-text);
 }
+
+/* =========================================================
+   SOCIAL ICON COLORS
+========================================================= */
+
+.social-button.google {
+    color: #4285F4;
+}
+
+.social-button.github {
+    color: #24292F;
+}
+
+.social-button.facebook {
+    color: #1877F2;
+}
+.social-login {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.social-login form {
+    margin: 0;
+}
+
+.social-button {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+}
+
+/* Make Font Awesome icons visible */
+
+.reserve-social-btn i {
+    display: inline-block;
+
+    line-height: 1;
+
+    font-size: 17px;
+}
+
 
 
 /* =========================================================
@@ -1233,6 +1284,47 @@
 
                 </form>
 
+   <!-- SOCIAL LOGIN =================================== -->
+
+                    <div class="social-login">
+
+
+                        <!-- Facebook -->
+                        <form method="POST" action="{% url 'social:begin' 'facebook' %}">
+
+                            {% csrf_token %}
+
+                            <button type="submit" class="social-button facebook" title="Continue with Facebook">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </button>
+
+                        </form>
+
+
+                        <!-- Google -->
+                        <form method="POST" action="{% url 'social:begin' 'google-oauth2' %}">
+
+                            {% csrf_token %}
+
+                            <button type="submit" class="social-button google" title="Continue with Google">
+                                <i class="fa-brands fa-google"></i>
+                            </button>
+
+                        </form>
+
+
+                        <!-- GitHub -->
+                        <form method="POST" action="{% url 'social:begin' 'github' %}">
+
+                            {% csrf_token %}
+
+                            <button type="submit" class="social-button github" title="Continue with GitHub">
+                                <i class="fa-brands fa-github"></i>
+                            </button>
+
+                        </form>
+
+                    </div>
 
                 <!-- LOGIN -->
 

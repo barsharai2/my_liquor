@@ -29,7 +29,17 @@ SECRET_KEY = 'django-insecure-e!i-@kneom3ozrdtg1w99%v8(ydvi6==*^s@*+rw)9%k+fck5@
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+LOGIN_URL="login_part"
+LOGIN_REDIRECT_URL ="index" 
+LOGOUT_URL="log_out"
+LOGOUT_REDIRECT_URL ="login_part" 
+AUTHENTICATION_BACKENDS = [
+'social_core.backends.google.GoogleOAuth2',     
+'social_core.backends.github.GithubOAuth2',     
+'social_core.backends.facebook.FacebookOAuth2',     
+'django.contrib.auth.backends.ModelBackend', 
+      
+] 
 
 # Application definition
 
@@ -43,6 +53,7 @@ INSTALLED_APPS = [
 ]
 EXTERNAL_APPS=[
     'drink_app',
+    'social_django',
 ]
 INSTALLED_APPS.extend(EXTERNAL_APPS)
 
