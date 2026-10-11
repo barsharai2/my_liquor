@@ -90,91 +90,6 @@
                                 </a>
                             </li>
 
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-
-                            <li>
-                                <h6 class="dropdown-header">
-                                    Spirits
-                                </h6>
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    Whisky
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    Vodka
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    Rum
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    Gin
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    Tequila
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    Brandy & Cognac
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    Liqueurs
-                                </a>
-                            </li>
-
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-
-                            <li>
-                                <h6 class="dropdown-header">
-                                    Wine & Beer
-                                </h6>
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    Red Wine
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    White Wine
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    Sparkling Wine
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    Beer
-                                </a>
-                            </li>
 
                         </ul>
 
@@ -222,20 +137,17 @@
                 </ul>
 
 
-                <!-- SEARCH -->
-                <form action="{% url 'shop' %}" method="GET" class="navbar-search">
-
+<!-- search -->
+                <form action="{% url 'shop' %}" method="GET"
+                    style="display:flex;align-items:center;width:190px;margin:0 15px;border-bottom:1px solid #d4af37;">
                     <input type="search" name="q" placeholder="Search products..."
-                        value="{{ request.GET.q|default:'' }}" autocomplete="off">
-
-                    <button type="submit" aria-label="Search">
-                        <i class="bi bi-search"></i>
-                    </button>
-
-                </form>
+                        value="{{ request.GET.q|default:'' }}" autocomplete="off" aria-label="Search products"
+                        style="width:100%;min-width:0;padding:8px 2px;border:none;outline:none;background:transparent;color:#fff;font-size:13px;box-shadow:none;"><button
+                        type="submit" aria-label="Search"
+                        style="border:none;background:transparent;color:#d4af37;padding:7px 2px 7px 10px;cursor:pointer;"><i
+                            class="bi bi-search"></i></button></form>
 
 
-                ```html
                 <!-- ACCOUNT -->
                 <div class="navbar-actions d-flex align-items-center gap-2">
 
@@ -265,15 +177,15 @@
 
                     {% endif %}
 
+
                     <a href="{% url 'cart' %}" class="btn btn-outline-light position-relative">
                         <i class="bi bi-bag"></i>
 
                         <span
                             class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
-                            0
+                            {{ cart_count }}
                         </span>
                     </a>
-
                 </div>
 
 

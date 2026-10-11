@@ -15,7 +15,24 @@ path('contact/',contact, name='contact'),
 path('login/',login, name='login'), 
 path("logout/", logout_view, name="logout"),
 path('register/',register, name='register'),
-path('cart/',cart, name='cart'),
+
+path("cart/",cart, name="cart"),
+path(
+    "add-to-cart/<int:product_id>/",
+    add_to_cart,
+    name="add_to_cart",
+),
+path(
+    "cart/update/<int:product_id>/",
+    update_cart,
+    name="update_cart",
+),
+path(
+    "cart/remove/<int:product_id>/",
+    remove_from_cart,
+    name="remove_from_cart",
+),
+
 path("offers/",offers, name="offers"),
 path("brands/", brands, name="brands"),
 path("add-to-cart/<int:product_id>/",add_to_cart,name="add_to_cart" ),
@@ -27,4 +44,8 @@ path('password_reset_confirm/<uidb64>/<token>/',auth_views.PasswordResetConfirmV
 path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view( template_name="auth/password_reset_complete.html"), name='password_reset_complete'),
 
    
+
+path("checkout/esewa/", esewa_checkout, name="esewa_checkout"),
+path("payment/esewa/success/", esewa_success, name="esewa_success"),
+path("payment/esewa/failure/", esewa_failure, name="esewa_failure"),
 ]
